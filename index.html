@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Senora Simone : L'Aperitivo d'Onore 👑</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght=0,9..144,400;0,9..144,600;0,9..144,800;1,9..144,400&family=Plus+Jakarta+Sans:wght=0,400;0,500;0,600;0,700;0,800&family=Caveat:wght=700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .serif-title { font-family: 'Fraunces', serif; }
+        .handwritten { font-family: 'Caveat', cursive; }
+        
+        /* --- SYSTÈME DE CONFETTIS GÉANTES --- */
+        .mega-confetti {
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            will-change: transform, opacity;
+            animation: megaExplosion 1.8s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
+        }
+        @keyframes megaExplosion {
+            0% {
+                transform: translate(-50%, -50%) translate(0, 0) scale(0.3) rotate(0deg);
+                opacity: 1;
+            }
+            15% {
+                opacity: 1;
+            }
+            100% {
+                transform: translate(-50%, -50%) translate(var(--x), var(--y)) scale(var(--scale)) rotate(var(--rotate));
+                opacity: 0;
+            }
+        }
+
+        .tab-content { display: none; }
+        .tab-content.active {
+            display: block;
+            animation: fadeInTab 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        @keyframes fadeInTab {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-[#faf8f5] text-[#2a2421] min-h-screen flex flex-col justify-between overflow-x-hidden antialiased">
+
+    <audio id="sara-audio" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" preload="auto" loop></audio>
+
+    <div class="bg-[#2e4a3f] text-[#faf8f5] text-center py-2 px-4 text-[10px] font-bold tracking-[0.25em] uppercase shadow-sm">
+        👑 APERITIVO REALE • SUR LES PELOUSES DE BRETEUIL • SUJETS EXCLUSIFS 👑
+    </div>
+
+    <main class="flex-grow flex flex-col items-center justify-center p-4 md:p-6 w-full max-w-lg mx-auto">
+        
+        <header class="text-center mb-6 mt-4 flex flex-col items-center">
+            <div class="text-3xl mb-1 filter drop-shadow">👑</div>
+            <h1 class="serif-title text-3xl font-extrabold tracking-tight text-[#2a2421]">
+                Simone Truchon <span class="text-[#b85a3a] font-light italic">de la Bartesa</span>
+            </h1>
+            <p class="text-[10px] uppercase tracking-widest text-[#2e4a3f] mt-1 font-bold">
+                16 JUILLET • APÉRO, ESPAGNE ET TOSCANE CHIC
+            </p>
+        </header>
+
+        <nav class="w-full bg-[#f1eae1] p-1 rounded-2xl shadow-sm border border-[#e2d5c3] flex flex-wrap gap-1 mb-6">
+            <button onclick="switchTab('invitation')" id="btn-invitation" class="tab-btn flex-1 min-w-[80px] py-2.5 text-[11px] font-bold rounded-xl transition-all duration-300 flex flex-col items-center gap-0.5 text-[#faf8f5] bg-[#b85a3a]">
+                <span>🍷</span>
+                <span>L'Appuntamento</span>
+            </button>
+            <button onclick="switchTab('buffet')" id="btn-buffet" class="tab-btn flex-1 min-w-[80px] py-2.5 text-[11px] font-bold rounded-xl transition-all duration-300 flex flex-col items-center gap-0.5 text-[#5c4d43] hover:text-[#2a2421]">
+                <span>🍕</span>
+                <span>Il Buffet</span>
+            </button>
+            <button onclick="switchTab('jeux')" id="btn-jeux" class="tab-btn flex-1 min-w-[80px] py-2.5 text-[11px] font-bold rounded-xl transition-all duration-300 flex flex-col items-center gap-0.5 text-[#5c4d43] hover:text-[#2a2421]">
+                <span>🪵</span>
+                <span>I Giochi</span>
+            </button>
+            <button onclick="switchTab('paris')" id="btn-paris" class="tab-btn flex-1 min-w-[80px] py-2.5 text-[11px] font-bold rounded-xl transition-all duration-300 flex flex-col items-center gap-0.5 text-[#5c4d43] hover:text-[#2a2421]">
+                <span>📊</span>
+                <span>I Pronostici</span>
+            </button>
+        </nav>
+
+        <section id="tab-invitation" class="tab-content active w-full bg-white text-[#2a2421] rounded-3xl shadow-xl border border-[#e2d5c3] overflow-hidden">
+            <div class="bg-[#2e4a3f] text-[#faf8f5] text-center py-2.5 text-xs font-semibold tracking-wider uppercase">
+                🇮🇹 À PARTIR DE 19H30 • Y HASTA QUE LA MUERTE NOS SEPARE
+            </div>
+            
+            <div class="p-6 space-y-6 text-center">
+                <div class="space-y-1">
+                    <h2 class="serif-title text-2xl font-bold text-[#b85a3a]">Le décret de la Senora</h2>
+                    <p class="quote-text font-serif italic text-sm text-[#5c4d43] px-2 leading-relaxed">
+                        "¡Hola a todos! Chers sujets, chers amis. Pour fêter dignement mon anniversaire, moi, la Senora Simone, je vous convie à un événement transfrontalier historique. On va parler espagnol avec les mains, boire du Prosecco, et envahir la pelouse."
+                    </p>
+                </div>
+
+                <div class="bg-[#fdfbf7] rounded-2xl p-4 border border-[#e2d5c3] text-center shadow-inner space-y-3">
+                    <p class="text-[10px] uppercase text-[#2e4a3f] tracking-widest font-bold flex items-center justify-center gap-2">
+                        <span class="inline-block w-2 h-2 rounded-full bg-[#e57c58] animate-pulse"></span> RADAR DE LA SENORA SIMONE
+                    </p>
+                    <div id="geoloc-status" class="text-xs text-[#5c4d43] leading-relaxed">
+                        Colle ici le code GPS envoyé par Simone sur WhatsApp le jour J pour voir à quelle distance elle se trouve sur la pelouse :
+                    </div>
+                    <div class="flex gap-2 max-w-xs mx-auto">
+                        <input type="text" id="simone-gps-code" placeholder="Ex: 48.8491,2.3131" class="text-xs px-3 py-2 rounded-xl border border-[#e2d5c3] bg-white flex-grow text-center focus:outline-none focus:ring-1 focus:ring-[#b85a3a]">
+                        <button onclick="getLiveLocation()" class="bg-[#2e4a3f] hover:bg-[#1e332b] text-white text-[11px] font-bold py-2 px-3 rounded-xl transition-colors shadow-sm uppercase tracking-wider">
+                            Calculer
+                        </button>
+                    </div>
+                    <div class="text-[10px] text-[#5c4d43] pt-2 border-t border-dashed border-[#e2d5c3]">
+                        <button onclick="generateSimoneCode()" class="text-[#b85a3a] underline font-bold">⚙️ Zone Simone : Obtenir mon code de partage</button>
+                        <div id="simone-generated-code" class="hidden mt-1 font-mono text-[#2e4a3f] bg-white p-1 rounded border border-[#e2d5c3]"></div>
+                    </div>
+                </div>
+
+                <div class="bg-[#fdfbf7] rounded-2xl p-4 border border-[#e2d5c3] text-center shadow-inner space-y-2">
+                    <p class="text-[10px] uppercase text-[#b85a3a] tracking-widest font-bold">
+                        ⏳ GÉNÉRATEUR OFFICIEL D'EXCUSES DE RETARD
+                    </p>
+                    <p class="text-xs text-[#5c4d43]">Tu prévois déjà d'arriver en retard ? Clique pour obtenir ta dispense impériale :</p>
+                    <div id="excuse-box" class="text-xs font-serif italic text-[#2e4a3f] min-h-[32px] flex items-center justify-center font-bold px-2">
+                        "En attente d'une excuse valable..."
+                    </div>
+                    <button onclick="generateExcuse()" class="bg-[#f1eae1] border border-[#e2d5c3] hover:bg-[#e2d5c3] text-[#2a2421] text-[10px] font-bold py-1.5 px-3 rounded-lg uppercase tracking-wider transition-all">
+                        🎲 Générer une excuse
+                    </button>
+                </div>
+
+                <div class="bg-[#fdfbf7] rounded-2xl p-4 border border-[#e2d5c3] text-center shadow-inner">
+                    <p class="text-[10px] uppercase text-[#2e4a3f] tracking-widest font-bold mb-2 flex items-center justify-center gap-2">
+                        🎵 LE JUKEBOX REALE (SPOTIFY JAM)
+                    </p>
+                    <p class="text-xs text-[#5c4d43] mb-3">Prends le contrôle des platines avec Simone pour mixer l'Espagne et l'Italie.</p>
+                    <a href="https://spotify.link/iPSDQXKl13b" target="_blank" class="inline-flex items-center gap-2 bg-[#1DB954] hover:bg-[#1ed760] text-white text-xs font-bold py-3 px-6 rounded-xl transition-all shadow-md tracking-wider uppercase">
+                        <span>🔊 REJOINDRE LE JAM EN DIRECT</span>
+                    </a>
+                </div>
+
+                <div class="bg-[#fdfbf7] rounded-2xl p-4 text-left border border-[#e2d5c3] space-y-3">
+                    <h3 class="serif-title font-bold text-[#2e4a3f] text-sm flex items-center gap-2">
+                        <span>📋</span> PROTOCOLE DE LA PELOUSE :
+                    </h3>
+                    <div class="flex items-start gap-3 text-xs text-[#5c4d43]">
+                        <span class="bg-[#b85a3a] text-white rounded-full w-5 h-5 flex items-center justify-center text-[10px] font-bold shrink-0 mt-0.5">1</span>
+                        <p><strong>Le point d'ancrage :</strong> On prend possession des pelouses de l'Avenue de Breteuil. Ramène ton plus beau plaid, la Senora déteste l'herbe qui gratte.</p>
+                    </div>
+                </div>
+
+                <button id="trigger-button" onclick="handleFestiveClick(event)" class="w-full py-4 px-6 bg-[#2e4a3f] hover:bg-[#21372e] text-white font-extrabold text-xs rounded-xl shadow-md flex items-center justify-center gap-2 tracking-[0.15em] uppercase border-b-4 border-[#1c2e26] transition-all duration-300 relative">
+                    <span id="button-text">📋 CONFIRMER MA PRÉSENCE SUR LE REGISTRE</span>
+                </button>
+            </div>
+        </section>
+
+        <section id="tab-buffet" class="tab-content w-full bg-white text-[#2a2421] rounded-3xl shadow-xl border border-[#e2d5c3] p-6 space-y-6">
+            <div class="text-center space-y-1">
+                <h2 class="serif-title text-2xl font-bold text-[#b85a3a]">L'Auberge de la Bartesa</h2>
+                <p class="text-xs text-[#5c4d43] italic">Inscrivez votre nom (plusieurs noms possibles par ligne !) pour garnir la nappe.</p>
+            </div>
+            <div id="buffet-container" class="space-y-2.5"></div>
+        </section>
+
+        <section id="tab-jeux" class="tab-content w-full bg-white text-[#2a2421] rounded-3xl shadow-xl border border-[#e2d5c3] p-6 space-y-6">
+            <div class="text-center space-y-1">
+                <h2 class="serif-title text-2xl font-bold text-[#b85a3a]">L'Artillerie de Divertissement</h2>
+                <p class="text-xs text-[#5c4d43] italic">Les armes de jet réglementaires pour l'Avenue de Breteuil.</p>
+            </div>
+            <div id="jeux-container" class="space-y-2.5"></div>
+        </section>
+
+        <section id="tab-paris" class="tab-content w-full bg-white text-[#2a2421] rounded-3xl shadow-xl border border-[#e2d5c3] p-6 space-y-6">
+            <div class="text-center space-y-1">
+                <h2 class="serif-title text-2xl font-bold text-[#b85a3a]">I Pronostici della Pelouse</h2>
+                <p class="text-xs text-[#5c4d43] italic">Parce qu'un bon anniversaire se construit sur de gentilles petites vannes.</p>
+            </div>
+            
+            <div class="space-y-4">
+                <div class="bg-[#fdfbf7] p-4 rounded-xl border border-[#e2d5c3] space-y-2">
+                    <span class="text-xs font-bold text-[#b85a3a] block uppercase tracking-wider">🪵 LE PIRE JOUEUR DE MÖLKKY</span>
+                    <p class="text-[11px] text-[#5c4d43] italic">Celui qui va rater une quille isolée à 2 mètres et l'envoyer sur un passant.</p>
+                    <div class="flex gap-2">
+                        <input type="text" placeholder="Ton nom..." class="pari-voter text-xs px-2.5 py-1.5 rounded-lg border border-[#e2d5c3] bg-white w-1/2 focus:outline-none focus:ring-1 focus:ring-[#b85a3a]">
+                        <input type="text" placeholder="Ton suspect..." class="pari-target text-xs px-2.5 py-1.5 rounded-lg border border-[#e2d5c3] bg-white w-1/2 focus:outline-none focus:ring-1 focus:ring-[#b85a3a]">
+                    </div>
+                </div>
+
+                <div class="bg-[#fdfbf7] p-4 rounded-xl border border-[#e2d5c3] space-y-2">
+                    <span class="text-xs font-bold text-[#2e4a3f] block uppercase tracking-wider">🥂 LE DIPLOMATE DU PROSECCO</span>
+                    <p class="text-[11px] text-[#5c4d43] italic">Celui qui va parler couramment espagnol et italien avec les mains dès le deuxième verre.</p>
+                    <div class="flex gap-2">
+                        <input type="text" placeholder="Ton nom..." class="pari-voter text-xs px-2.5 py-1.5 rounded-lg border border-[#e2d5c3] bg-white w-1/2 focus:outline-none focus:ring-1 focus:ring-[#b85a3a]">
+                        <input type="text" placeholder="Ton suspect..." class="pari-target text-xs px-2.5 py-1.5 rounded-lg border border-[#e2d5c3] bg-white w-1/2 focus:outline-none focus:ring-1 focus:ring-[#b85a3a]">
+                    </div>
+                </div>
+
+                <div class="bg-[#fdfbf7] p-4 rounded-xl border border-[#e2d5c3] space-y-2">
+                    <span class="text-xs font-bold text-[#5c4d43] block uppercase tracking-wider">🛋️ LE RECOUVREUR DE PLAID</span>
+                    <p class="text-[11px] text-[#5c4d43] italic">Celui qui va squatter et s'enrouler dans le plaid le plus doux pour somnoler dès 21h30.</p>
+                    <div class="flex gap-2">
+                        <input type="text" placeholder="Ton nom..." class="pari-voter text-xs px-2.5 py-1.5 rounded-lg border border-[#e2d5c3] bg-white w-1/2 focus:outline-none focus:ring-1 focus:ring-[#b85a3a]">
+                        <input type="text" placeholder="Ton suspect..." class="pari-target text-xs px-2.5 py-1.5 rounded-lg border border-[#e2d5c3] bg-white w-1/2 focus:outline-none focus:ring-1 focus:ring-[#b85a3a]">
+                    </div>
+                </div>
+
+                <div class="bg-[#fff5f5] p-4 rounded-xl border border-[#feb2b2] space-y-2">
+                    <span class="text-xs font-bold text-[#c53030] block uppercase tracking-wider">🚨 CELLULE ANTI-FRAUDE (MÖLKKY)</span>
+                    <p class="text-[11px] text-[#9b2c2c] italic">Balancez ici (anonymement) le joueur que vous soupçonnez d'avancer le pied pendant son lancer.</p>
+                    <input type="text" id="triche-input" placeholder="Nom du tricheur présumé..." class="w-full text-xs px-2.5 py-1.5 rounded-lg border border-[#feb2b2] bg-white focus:outline-none focus:ring-1 focus:ring-[#c53030]">
+                </div>
+
+                <button onclick="submitParis(event)" class="w-full py-3 bg-[#b85a3a] hover:bg-[#9e4a2e] text-white font-bold text-xs rounded-xl tracking-wider uppercase transition-colors shadow-sm">
+                    🗳️ ENREGISTRER MES PRONOSTICS REALE
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="w-full text-center py-4 px-6 text-[9px] text-[#5c4d43] border-t border-[#e2d5c3] bg-[#f1eae1] tracking-wider uppercase font-bold">
+        SIMONE PRODUCTION • TOUS DROITS RÉSERVÉS AUX AMATEURS DE SPRITZ 🍾
+    </footer>
+
+    <script>
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('text-[#faf8f5]', 'bg-[#b85a3a]');
+                btn.classList.add('text-[#5c4d43]');
+            });
+
+            document.getElementById('tab-' + tabId).classList.add('active');
+            const activeBtn = document.getElementById('btn-' + tabId);
+            activeBtn.classList.add('text-[#faf8f5]', 'bg-[#b85a3a]');
+            activeBtn.classList.remove('text-[#5c4d43]');
+        }
+
+        const buffetItems = [
+            { title: "Fait Maison 🥧", sub: "Quiche, cake, etc. (Sortez vos talents !)" },
+            { title: "Chips & Gâteaux Apéro 🍿", sub: "Le croquant réglementaire des pelouses" },
+            { title: "Légumes & Condiments 🥕", sub: "Pour l'alibi healthy (tomates cerises, houmous, olives...)" },
+            { title: "Baguettes + Fromage ou Rillettes 🥖", sub: "Les piliers de la gastronomie de canapé de jardin" },
+            { title: "Boissons (Softs) 🥤", sub: "L'eau fraîche et les jus pour hydrater les troupes" },
+            { title: "Alcools d'Honneur 🍷", sub: "Vins, sangria, prosecco... (Et champagne si vous voulez, je prends tout !)" },
+            { title: "Bières 🍺", sub: "Les petites blondes bien fraîches sorties de la glacière" },
+            { title: "L'Intendance Royale 🛠️", sub: "Verres, gobelets... et le très convoité tire-bouchon !" }
+        ];
+
+        const jeuxItems = [
+            { title: "Jeu de Mölkky 🪵", sub: "Le grand classique des pelouses" },
+            { title: "Kit de Spikeball 🦘", sub: "Pour les duels athlétiques" },
+            { title: "Boules de Pétanque 🔮", sub: "La tradition du midi" },
+            { title: "Jeux de Cartes / Uno 🃏", sub: "Pour finir en beauté" }
+        ];
+
+        function generateList(items, containerId) {
+            const container = document.getElementById(containerId);
+            items.forEach((item, index) => {
+                const card = document.createElement('div');
+                card.className = "flex items-center justify-between p-3.5 bg-[#fdfbf7] rounded-xl border border-[#e2d5c3] transition-all duration-300 shadow-sm";
+                card.innerHTML = `
+                    <div class="flex items-center gap-3 flex-grow">
+                        <input type="checkbox" id="${containerId}-${index}" onchange="toggleSelect(this)" class="w-4 h-4 rounded border-[#e2d5c3] text-[#b85a3a] focus:ring-[#b85a3a] shrink-0">
+                        <label for="${containerId}-${index}" class="text-xs font-bold text-[#2a2421] leading-tight">
+                            ${item.title}<br><span class="text-[10px] text-[#5c4d43] font-normal italic">${item.sub}</span>
+                        </label>
+                    </div>
+                    <input type="text" placeholder="Nom(s)..." class="text-xs px-3 py-1.5 rounded-lg border border-[#e2d5c3] bg-white w-32 text-right focus:outline-none focus:ring-1 focus:ring-[#b85a3a] shrink-0 ml-2">
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        generateList(buffetItems, 'buffet-container');
+        generateList(jeuxItems, 'jeux-container');
+
+        function toggleSelect(checkbox) {
+            const parent = checkbox.closest('div').parentElement;
+            if (checkbox.checked) {
+                parent.classList.add('bg-[#f3eae1]', 'border-[#b85a3a]');
+            } else {
+                parent.classList.remove('bg-[#f3eae1]', 'border-[#b85a3a]');
+            }
+        }
+
+        document.addEventListener('input', function(e) {
+            if (e.target.tagName === 'INPUT' && e.target.type === 'text' && !e.target.classList.contains('pari-voter') && !e.target.classList.contains('pari-target') && e.target.id !== 'triche-input') {
+                const card = e.target.parentElement;
+                const checkbox = card.querySelector('input[type="checkbox"]');
+                if (e.target.value.trim() !== "") {
+                    checkbox.checked = true;
+                    card.classList.add('bg-[#f3eae1]', 'border-[#b85a3a]');
+                } else {
+                    checkbox.checked = false;
+                    card.classList.remove('bg-[#f3eae1]', 'border-[#b85a3a]');
+                }
+            }
+        });
+
+        // --- EXCUSES ALÉATOIRES ---
+        const excuses = [
+            "« J'ai dû repasser la nappe du pique-nique à température royale. »",
+            "« Mon plaid a fait une réaction allergique à la pelouse de Breteuil. »",
+            "« J'ai confondu l'Avenue de Breteuil avec une ruelle de Florence, je fais demi-tour. »",
+            "« Je peaufinais la prononciation du mot 'Prosecco' avec les mains. »",
+            "« J'ai été pris en otage par un bouchon de bouteille de Sangria récalcitrant. »",
+            "« Le règlement impérial m'interdit d'arriver avant que la glace des boissons n'ait fondu de 3%. »"
+        ];
+        function generateExcuse() {
+            const r = excuses[Math.floor(Math.random() * excuses.length)];
+            document.getElementById('excuse-box').innerHTML = r;
+        }
+
+        // --- GESTION AUDIO EASTER EGG ---
+        let isPlaying = false;
+
+        function handleFestiveClick(event) {
+            const audio = document.getElementById('sara-audio');
+            const btnText = document.getElementById('button-text');
+            const btn = document.getElementById('trigger-button');
+            
+            if (!isPlaying) {
+                audio.play().catch(err => console.log("Lancement audio forcé"));
+                isPlaying = true;
+                btn.classList.remove('bg-[#2e4a3f]', 'border-[#1c2e26]');
+                btn.classList.add('bg-[#b85a3a]', 'border-[#823b23]');
+                btnText.innerHTML = "⏸️ PAUSE LA MUSIQUE DE LA BARTESA";
+            } else {
+                audio.pause();
+                isPlaying = false;
+                btnText.innerHTML = "📋 CONFIRMER MA PRÉSENCE SUR LE REGISTRE";
+                btn.classList.remove('bg-[#b85a3a]', 'border-[#823b23]');
+                btn.classList.add('bg-[#2e4a3f]', 'border-[#1c2e26]');
+            }
+
+            launchMegaExplosion(event);
+        }
+
+        // Action de vote des paris
+        function submitParis(event) {
+            const tricheur = document.getElementById('triche-input').value.trim();
+            if(tricheur !== "") {
+                alert(`🚨 ALERTE TRICHE : Le dossier sur ${tricheur} a été transmis en priorité au Haut Conseil du Mölkky.`);
+            } else {
+                alert("🎯 Pronostics enregistrés à la Cour Royale ! Que les meilleurs (ou les pires) gagnent.");
+            }
+            launchMegaExplosion(event);
+        }
+
+        function launchMegaExplosion(event) {
+            const symbols = ['🍹', '👑', '🥂', '🍾', '🇮🇹', '🍕', '🎉', '✨', '💃', '🕺', '🎵', '☀️', '🍋', '🔥', '❤️'];
+            const rect = event.currentTarget.getBoundingClientRect();
+            const clickX = rect.left + rect.width / 2;
+            const clickY = rect.top + rect.height / 2;
+
+            for (let i = 0; i < 55; i++) {
+                const p = document.createElement('div');
+                p.classList.add('mega-confetti');
+                p.innerHTML = symbols[Math.floor(Math.random() * symbols.length)];
+                
+                p.style.left = clickX + 'px';
+                p.style.top = clickY + 'px';
+
+                const angle = Math.random() * Math.PI * 2;
+                const distance = 180 + Math.random() * 320; 
+                const x = Math.cos(angle) * distance + 'px';
+                const y = Math.sin(angle) * distance + 'px';
+
+                const scale = 1.3 + Math.random() * 1.6;
+                const rotate = (Math.random() * 360 + 360) + 'deg';
+
+                p.style.setProperty('--x', x);
+                p.style.setProperty('--y', y);
+                p.style.setProperty('--scale', scale);
+                p.style.setProperty('--rotate', rotate);
+                
+                p.style.fontSize = '26px';
+
+                document.body.appendChild(p);
+                setTimeout(() => p.remove(), 1800);
+            }
+        }
+
+        // --- GÉOLOCALISATION ---
+        function generateSimoneCode() {
+            const divCode = document.getElementById('simone-generated-code');
+            divCode.classList.remove('hidden');
+            divCode.innerHTML = "Recherche de tes coordonnées...";
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    const lat = position.coords.latitude.toFixed(4);
+                    const lon = position.coords.longitude.toFixed(4);
+                    divCode.innerHTML = `Copie ce code et envoie-le à tes invités : <br><strong>${lat},${lon}</strong>`;
+                },
+                () => { divCode.innerHTML = "❌ Active ton GPS pour générer ton code."; }
+            );
+        }
+
+        function getLiveLocation() {
+            const status = document.getElementById('geoloc-status');
+            const inputCode = document.getElementById('simone-gps-code').value.trim();
+            if (!inputCode.includes(',')) {
+                status.innerHTML = "❌ Le format du code est invalide. Attends que Simone te l'envoie !";
+                return;
+            }
+            const parts = inputCode.split(',');
+            const targetLat = parseFloat(parts[0]);
+            const targetLon = parseFloat(parts[1]);
+
+            if (!navigator.geolocation) {
+                status.innerHTML = "La géolocalisation n'est pas disponible sur ton appareil.";
+                return;
+            }
+            status.innerHTML = "Calcul de ta distance par rapport à la Senora...";
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    const userLat = position.coords.latitude;
+                    const userLon = position.coords.longitude;
+                    const distance = calculateDistance(userLat, userLon, targetLat, targetLon);
+                    if (distance < 0.03) {
+                        status.innerHTML = `📍 <strong>Tu es sur Simone !</strong> Lève les yeux de ton téléphone et salue la Duchesse ! 👑`;
+                    } else if (distance < 1) {
+                        status.innerHTML = `📍 Tu es tout près ! À environ <strong>${Math.round(distance * 1000)} mètres</strong> de Simone.`;
+                    } else {
+                        status.innerHTML = `📍 Tu es actuellement à <strong>${distance.toFixed(1)} km</strong> de la Senora. En route !`;
+                    }
+                },
+                () => { status.innerHTML = "❌ Impossible d'accéder à ton GPS."; }
+            );
+        }
+
+        function calculateDistance(lat1, lon1, lat2, lon2) {
+            const R = 6371;
+            const dLat = (lat2 - lat1) * Math.PI / 180;
+            const dLon = (lon2 - lon1) * Math.PI / 180;
+            const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                      Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+                      Math.sin(dLon / 2) * Math.sin(dLon / 2);
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+            return R * c;
+        }
+    </script>
+</body>
+</html>
