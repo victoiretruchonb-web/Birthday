@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Senora Simone : L'Aperitivo d'Onore 👑</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght=0,9..144,400;0,9..144,600;0,9..144,800;1,9..144,400&family=Plus+Jakarta+Sans:wght=0,400;0,500;0,600;0,700;0,800&family=Caveat:wght=700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .serif-title { font-family: 'Fraunces', serif; }
+        .handwritten { font-family: 'Caveat', cursive; }
+        
+        .mega-confetti {
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            will-change: transform, opacity;
+            animation: megaExplosion 1.8s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
+        }
+        @keyframes megaExplosion {
+            0% { transform: translate(-50%, -50%) translate(0, 0) scale(0.3) rotate(0deg); opacity: 1; }
+            15% { opacity: 1; }
+            100% { transform: translate(-50%, -50%) translate(var(--x), var(--y)) scale(var(--scale)) rotate(var(--rotate)); opacity: 0; }
+        }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; animation: fadeInTab 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
+        @keyframes fadeInTab { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="bg-[#faf8f5] text-[#2a2421] min-h-screen flex flex-col justify-between overflow-x-hidden antialiased">
+
+    <audio id="sara-audio" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" preload="auto" loop></audio>
+
+    <div class="bg-[#2e4a3f] text-[#faf8f5] text-center py-2 px-4 text-[10px] font-bold tracking-[0.25em] uppercase shadow-sm">
+        👑 APERITIVO REALE • SUR LES PELOUSES DE BRETEUIL • SUJETS EXCLUSIFS 👑
+    </div>
+
+    <main class="flex-grow flex flex-col items-center justify-center p-4 md:p-6 w-full max-w-lg mx-auto">
+        
+        <header class="text-center mb-6 mt-4 flex flex-col items-center">
+            <div class="text-3xl mb-1 filter drop-shadow">👑</div>
+            <h1 class="serif-title text-3xl font-extrabold tracking-tight text-[#2a2421]">
+                Simone Truchon <span class="text-[#b85a3a] font-light italic">de la Bartesa</span>
+            </h1>
+            <p class="text-[10px] uppercase tracking-widest text-[#2e4a3f] mt-1 font-bold">16 JUILLET • APÉRO, ESPAGNE ET TOSCANE CHIC</p>
+        </header>
+
+        <nav class="w-full bg-[#f1eae1] p-1 rounded-2xl shadow-sm border border-[#e2d5c3] flex flex-wrap gap-1 mb-6">
+            <button onclick="switchTab('invitation')" id="btn-invitation" class="tab-btn flex-1 min-w-[80px] py-2.5 text-[11px] font-bold rounded-xl transition-all duration-300 flex flex-col items-center gap-0.5 text-[#faf8f5] bg-[#b85a3a]">
+                <span>🍷</span><span>L'Appuntamento</span>
+            </button>
+            <button onclick="switchTab('buffet')" id="btn-buffet" class="tab-btn flex-1 min-w-[80px] py-2.5 text-[11px] font-bold rounded-xl transition-all duration-300 flex flex-col items-center gap-0.5 text-[#5c4d43] hover:text-[#2a2421]">
+                <span>🍕</span><span>Il Buffet</span>
+            </button>
+            <button onclick="switchTab('jeux')" id="btn-jeux" class="tab-btn flex-1 min-w-[80px] py-2.5 text-[11px] font-bold rounded-xl transition-all duration-300 flex flex-col items-center gap-0.5 text-[#5c4d43] hover:text-[#2a2421]">
+                <span>🪵</span><span>I Giochi</span>
+            </button>
+            <button onclick="switchTab('paris')" id="btn-paris" class="tab-btn flex-1 min-w-[80px] py-2.5 text-[11px] font-bold rounded-xl transition-all duration-300 flex flex-col items-center gap-0.5 text-[#5c4d43] hover:text-[#2a2421]">
+                <span>📊</span><span>I Pronostici</span>
+            </button>
+            <button onclick="switchTab('musica')" id="btn-musica" class="tab-btn flex-1 min-w-[80px] py-2.5 text-[11px] font-bold rounded-xl transition-all duration-300 flex flex-col items-center gap-0.5 text-[#5c4d43] hover:text-[#2a2421]">
+                <span>🎵</span><span>La Musica</span>
+            </button>
+        </nav>
+
+        <section id="tab-invitation" class="tab-content active w-full bg-white text-[#2a2421] rounded-3xl shadow-xl border border-[#e2d5c3] overflow-hidden">
+            <div class="bg-[#2e4a3f] text-[#faf8f5] text-center py-2.5 text-xs font-semibold tracking-wider uppercase">
+                🇮🇹 À PARTIR DE 19H30 • Y HASTA QUE LA MUERTE NOS SEPARE
+            </div>
+            
+            <div class="p-6 space-y-6 text-center">
+                <div class="space-y-1">
+                    <h2 class="serif-title text-2xl font-bold text-[#b85a3a]">Le décret de la Senora</h2>
+                    <p class="quote-text font-serif italic text-sm text-[#5c4d43] px-2 leading-relaxed">
+                        "¡Hola a todos! Chers sujets, chers amis. Pour fêter dignement mon anniversaire, moi, la Senora Simone, je vous convie à un événement transfrontalier historique. On va parler espagnol avec les mains, boire du Prosecco, et envahir la pelouse."
+                    </p>
+                </div>
+
+                <div class="bg-[#fdfbf7] rounded-2xl p-4 border border-[#e2d5c3] text-center shadow-inner space-y-3">
+                    <p class="text-[10px] uppercase text-[#2e4a3f] tracking-widest font-bold flex items-center justify-center gap-2">
+                        <span class="inline-block w-2 h-2 rounded-full bg-[#e57c58] animate-pulse"></span> RADAR DE LA SENORA SIMONE
+                    </p>
+                    <div id="geoloc-status" class="text-xs text-[#5c4d43] leading-relaxed">Colle ici le code GPS envoyé par Simone sur WhatsApp :</div>
+                    <div class="flex gap-2 max-w-xs mx-auto">
+                        <input type="text" id="simone-gps-code" placeholder="Ex: 48.8491,2.3131" class="text-xs px-3 py-2 rounded-xl border border-[#e2d5c3] bg-white flex-grow text-center focus:outline-none focus:ring-1 focus:ring-[#b85a3a]">
+                        <button onclick="getLiveLocation()" class="bg-[#2e4a3f] hover:bg-[#1e332b] text-white text-[11px] font-bold py-2 px-3 rounded-xl transition-colors shadow-sm uppercase tracking-wider">Calculer</button>
+                    </div>
+                </div>
+
+                <div class="bg-[#fdfbf7] rounded-2xl p-4 border border-[#e2d5c3] text-center shadow-inner space-y-2">
+                    <p class="text-[10px] uppercase text-[#b85a3a] tracking-widest font-bold">⏳ GÉNÉRATEUR OFFICIEL D'EXCUSES DE RETARD</p>
+                    <div id="excuse-box" class="text-xs font-serif italic text-[#2e4a3f] min-h-[32px] flex items-center justify-center font-bold px-2">"En attente d'une excuse valable..."</div>
+                    <button onclick="generateExcuse()" class="bg-[#f1eae1] border border-[#e2d5c3] hover:bg-[#e2d5c3] text-[#2a2421] text-[10px] font-bold py-1.5 px-3 rounded-lg uppercase tracking-wider transition-all">🎲 Générer une excuse</button>
+                </div>
+
+                <button id="trigger-button" onclick="handleFestiveClick(event)" class="w-full py-4 px-6 bg-[#2e4a3f] hover:bg-[#21372e] text-white font-extrabold text-xs rounded-xl shadow-md flex items-center justify-center gap-2 tracking-[0.15em] uppercase border-b-4 border-[#1c2e26] transition-all duration-300 relative">
+                    <span id="button-text">📋 CONFIRMER MA PRÉSENCE SUR LE REGISTRE</span>
+                </button>
+            </div>
+        </section>
+
+        <section id="tab-buffet" class="tab-content w-full bg-white text-[#2a2421] rounded-3xl shadow-xl border border-[#e2d5c3] p-6 space-y-6">
+            <div class="text-center space-y-1">
+                <h2 class="serif-title text-2xl font-bold text-[#b85a3a]">L'Auberge de la Bartesa</h2>
+                <p class="text-xs text-[#5c4d43] italic">Inscrivez votre nom pour garnir la nappe.</p>
+            </div>
+            <div id="buffet-container" class="space-y-2.5"></div>
+            <button onclick="sendDataToGoogleSheetInvisible(event)" class="w-full py-3 bg-[#2e4a3f] text-white font-bold text-xs rounded-xl tracking-wider uppercase transition-colors shadow-sm">
+                💾 ENREGISTRER MON BUFFET
+            </button>
+        </section>
+
+        <section id="tab-jeux" class="tab-content w-full bg-white text-[#2a2421] rounded-3xl shadow-xl border border-[#e2d5c3] p-6 space-y-6">
+            <div class="text-center space-y-1">
+                <h2 class="serif-title text-2xl font-bold text-[#b85a3a]">L'Artillerie de Divertissement</h2>
+                <p class="text-xs text-[#5c4d43] italic">Qu'apportez-vous pour jouer ?</p>
+            </div>
+            <div id="jeux-container" class="space-y-2.5"></div>
+            <button onclick="sendDataToGoogleSheetInvisible(event)" class="w-full py-3 bg-[#2e4a3f] text-white font-bold text-xs rounded-xl tracking-wider uppercase transition-colors shadow-sm">
+                💾 ENREGISTRER MES JEUX
+            </button>
+        </section>
+
+        <section id="tab-paris" class="tab-content w-full bg-white text-[#2a2421] rounded-3xl shadow-xl border border-[#e2d5c3] p-6 space-y-6">
+            <div class="text-center space-y-1">
+                <h2 class="serif-title text-2xl font-bold text-[#b85a3a]">I Pronostici della Pelouse</h2>
+                <p class="text-xs text-[#5c4d43] italic">Les paris officiels de la Cour.</p>
+            </div>
+            
+            <div class="space-y-4">
+                <div class="bg-[#fdfbf7] p-4 rounded-xl border border-[#e2d5c3] space-y-2">
+                    <span class="text-xs font-bold text-[#b85a3a] block uppercase tracking-wider">🪵 LE PIRE JOUEUR DE MÖLKKY</span>
+                    <div class="flex gap-2">
+                        <input type="text" id="pari-molkky-voter" placeholder="Ton nom..." class="text-xs px-2.5 py-1.5 rounded-lg border border-[#e2d5c3] bg-white w-1/2 focus:outline-none">
+                        <input type="text" id="pari-molkky-target" placeholder="Ton suspect..." class="text-xs px-2.5 py-1.5 rounded-lg border border-[#e2d5c3] bg-white w-1/2 focus:outline-none">
+                    </div>
+                </div>
+
+                <div class="bg-[#fdfbf7] p-4 rounded-xl border border-[#e2d5c3] space-y-2">
+                    <span class="text-xs font-bold text-[#2e4a3f] block uppercase tracking-wider">🥂 LE DIPLOMATE DU PROSECCO</span>
+                    <div class="flex gap-2">
+                        <input type="text" id="pari-prosecco-voter" placeholder="Ton nom..." class="text-xs px-2.5 py-1.5 rounded-lg border border-[#e2d5c3] bg-white w-1/2 focus:outline-none">
+                        <input type="text" id="pari-prosecco-target" placeholder="Ton suspect..." class="text-xs px-2.5 py-1.5 rounded-lg border border-[#e2d5c3] bg-white w-1/2 focus:outline-none">
+                    </div>
+                </div>
+
+                <div class="bg-[#fdfbf7] p-4 rounded-xl border border-[#e2d5c3] space-y-2">
+                    <span class="text-xs font-bold text-[#5c4d43] block uppercase tracking-wider">🛋️ LE RECOUVREUR DE PLAID</span>
+                    <div class="flex gap-2">
+                        <input type="text" id="pari-plaid-voter" placeholder="Ton nom..." class="text-xs px-2.5 py-1.5 rounded-lg border border-[#e2d5c3] bg-white w-1/2 focus:outline-none">
+                        <input type="text" id="pari-plaid-target" placeholder="Ton suspect..." class="text-xs px-2.5 py-1.5 rounded-lg border border-[#e2d5c3] bg-white w-1/2 focus:outline-none">
+                    </div>
+                </div>
+
+                <div class="bg-[#fff5f5] p-4 rounded-xl border border-[#feb2b2] space-y-2">
+                    <span class="text-xs font-bold text-[#c53030] block uppercase tracking-wider">🚨 CELLULE ANTI-FRAUDE (MÖLKKY)</span>
+                    <input type="text" id="triche-input" placeholder="Nom du tricheur présumé..." class="w-full text-xs px-2.5 py-1.5 rounded-lg border border-[#feb2b2] bg-white focus:outline-none">
+                </div>
+
+                <button onclick="sendDataToGoogleSheetInvisible(event)" class="w-full py-3 bg-[#b85a3a] text-white font-bold text-xs rounded-xl tracking-wider uppercase transition-colors shadow-sm">
+                    🗳️ ENREGISTRER MES PRONOSTICS REALE
+                </button>
+            </div>
+        </section>
+
+        <section id="tab-musica" class="tab-content w-full bg-white text-[#2a2421] rounded-3xl shadow-xl border border-[#e2d5c3] p-6 space-y-6">
+            <div class="text-center space-y-1">
+                <h2 class="serif-title text-2xl font-bold text-[#b85a3a]">La Playlist Reale</h2>
+                <p class="text-xs text-[#5c4d43] italic">Ajoute tes morceaux pour la soirée (la playlist reste ouverte jusqu'au jour J !).</p>
+            </div>
+
+            <div class="bg-[#fdfbf7] rounded-2xl p-4 border border-[#e2d5c3] text-center shadow-inner space-y-3">
+                <p class="text-[10px] uppercase text-[#2e4a3f] tracking-widest font-bold">🎧 PLAYLIST COLLABORATIVE</p>
+                <p class="text-xs text-[#5c4d43] leading-relaxed">Clique pour ouvrir la playlist Spotify collaborative et ajoute toi-même tes titres (lien valable jusqu'à la soirée, pas de date d'expiration courte).</p>
+                <a id="playlist-link" href="https://open.spotify.com/playlist/5jGVfmspdAFZpeosYtJa4P?si=bbb2768bcb3b4fea&pt=a97d1101b29b352c7d71fdd285054f9f" target="_blank" rel="noopener" class="inline-block bg-[#2e4a3f] hover:bg-[#1e332b] text-white text-[11px] font-bold py-2.5 px-4 rounded-xl transition-colors shadow-sm uppercase tracking-wider">
+                    🔗 Ouvrir la Playlist
+                </a>
+            </div>
+
+            <div class="bg-[#fdfbf7] rounded-2xl p-4 border border-[#e2d5c3] text-center shadow-inner space-y-3">
+                <p class="text-[10px] uppercase text-[#b85a3a] tracking-widest font-bold">💡 SUGGÉRER UN TITRE</p>
+                <p class="text-xs text-[#5c4d43] leading-relaxed">Pas sur Spotify ou tu préfères suggérer ? Écris le titre + artiste ici, ce sera ajouté au registre.</p>
+                <input type="text" id="musique-input" placeholder="Ex: Vitamina C - Can Can" class="w-full text-xs px-3 py-2 rounded-xl border border-[#e2d5c3] bg-white text-center focus:outline-none focus:ring-1 focus:ring-[#b85a3a]">
+            </div>
+
+            <button onclick="sendDataToGoogleSheetInvisible(event)" class="w-full py-3 bg-[#b85a3a] text-white font-bold text-xs rounded-xl tracking-wider uppercase transition-colors shadow-sm">
+                🎶 ENVOYER MA SUGGESTION
+            </button>
+        </section>
+
+    </main>
+
+    <footer class="w-full text-center py-4 px-6 text-[9px] text-[#5c4d43] border-t border-[#e2d5c3] bg-[#f1eae1] tracking-wider uppercase font-bold">
+        SIMONE PRODUCTION • TOUS DROITS RÉSERVÉS AUX AMATEURS DE SPRITZ 🍾
+    </footer>
+
+    <script>
+        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwHkH6OJiPXRqdmPTNr911EO76YpQZ2VJYOuNIq1wZfgBUV8Jo2VHcvcJnptp2aoeB6/exec"; 
+        
+        // Extraction de l'ID unique de ton script Google pour construire l'adresse de lecture
+        const SCRIPT_ID = "1vQrXhSuiGT092M1tr90LERND9dGyuep8d7rPa-llISrdCmfPh2gTgfz73bDdsASWA7m3ztDWhpHceTC"; 
+
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(btn => { btn.classList.remove('text-[#faf8f5]', 'bg-[#b85a3a]'); btn.classList.add('text-[#5c4d43]'); });
+            document.getElementById('tab-' + tabId).classList.add('active');
+            const activeBtn = document.getElementById('btn-' + tabId);
+            activeBtn.classList.add('text-[#faf8f5]', 'bg-[#b85a3a]');
+            activeBtn.classList.remove('text-[#5c4d43]');
+        }
+
+        const buffetItems = [
+            { id: "homemade", title: "Fait Maison 🥧", sub: "Quiche, cake, etc." },
+            { id: "chips", title: "Chips & Gâteaux Apéro 🍿", sub: "Le croquant réglementaire" },
+            { id: "veggies", title: "Légumes & Condiments 🥕", sub: "Pour l'alibi healthy" },
+            { id: "bread", title: "Baguettes + Fromage ou Rillettes 🥖", sub: "Les piliers" },
+            { id: "softs", title: "Boissons (Softs) 🥤", sub: "L'eau fraîche et les jus" },
+            { id: "alcohol", title: "Alcools d'Honneur 🍷", sub: "Vins, sangria, prosecco..." },
+            { id: "beers", title: "Bières 🍺", sub: "Bien fraîches" },
+            { id: "logistics", title: "L'Intendance Royale 🛠️", sub: "Gobelets et tire-bouchon !" }
+        ];
+
+        const jeuxItems = [
+            { id: "molkky_game", title: "Jeu de Mölkky 🪵", sub: "Le grand classique" },
+            { id: "spikeball", title: "Kit de Spikeball 🦘", sub: "Pour les duels" },
+            { id: "petanque", title: "Boules de Pétanque 🔮", sub: "La tradition" },
+            { id: "cards", title: "Jeux de Cartes / Uno 🃏", sub: "Pour finir en beauté" }
+        ];
+
+        // Objet global pour suivre les compteurs en temps réel
+        let globalCounts = {};
+
+        function generateList(items, containerId) {
+            const container = document.getElementById(containerId);
+            items.forEach((item, index) => {
+                const card = document.createElement('div');
+                card.className = "flex flex-col p-3.5 bg-[#fdfbf7] rounded-xl border border-[#e2d5c3] shadow-sm space-y-2";
+                card.innerHTML = `
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-3 flex-grow">
+                            <input type="checkbox" id="${containerId}-${index}" data-label="${item.title}" onchange="checkDoublon(this)" class="list-checkbox w-4 h-4 rounded border-[#e2d5c3] text-[#b85a3a]">
+                            <label for="${containerId}-${index}" class="text-xs font-bold text-[#2a2421] leading-tight">
+                                ${item.title}<br><span class="text-[10px] text-[#5c4d43] font-normal italic">${item.sub}</span>
+                            </label>
+                        </div>
+                        <input type="text" placeholder="Nom(s)..." class="list-name text-xs px-3 py-1.5 rounded-lg border border-[#e2d5c3] bg-white w-32 text-right">
+                    </div>
+                    <div id="badge-${containerId}-${index}" class="text-[10px] font-semibold text-gray-400 italic pl-7">👀 0 clic pour l'instant</div>
+                `;
+                container.appendChild(card);
+            });
+        }
+        generateList(buffetItems, 'buffet-container');
+        generateList(jeuxItems, 'jeux-container');
+
+        // INTELLIGENCE ANTI-DOUBLON : Analyse le clic de l'invité
+        function checkDoublon(checkbox) {
+            if (!checkbox.checked) return;
+            const label = checkbox.getAttribute('data-label');
+            const count = globalCounts[label] || 0;
+            
+            // Phrases drôles personnalisées selon le nombre de doublons
+            if (count === 1) {
+                alert(`🍷 Une personne apporte déjà ça. C'est très bien, mais assure-toi d'assurer sur les quantités !`);
+            } else if (count >= 2) {
+                alert(`🚨 ALERTE DOUBLON ! Déjà ${count} personnes apportent des "${label}". La Cour Royale risque l'indigestion. Tu es sûr de ton coup ou tu préfères prendre autre chose ? 😜`);
+            }
+        }
+
+        // INTELLIGENCE ARRIÈRE-PLAN : Lit ton fichier Excel au chargement de la page
+        function loadLiveExcelData() {
+            // URL de ton Excel converti en JSON de façon maligne
+            const readUrl = `https://docs.google.com/spreadsheets/d/${SCRIPT_ID}/gviz/tq?tqx=out:json`;
+
+            fetch(readUrl)
+            .then(res => res.text())
+            .then(txt => {
+                // Nettoyage de la protection de données Google Google
+                const jsonString = txt.substring(txt.indexOf("{"), txt.lastIndexOf("}") + 1);
+                const data = JSON.parse(jsonString);
+                const rows = data.table.rows;
+
+                // Réinitialisation des compteurs
+                globalCounts = {};
+
+                // On scanne chaque ligne reçue dans ton Excel
+                rows.forEach(row => {
+                    const buffetCell = row.c[1] ? row.c[1].v : "";
+                    const jeuxCell = row.c[2] ? row.c[2].v : "";
+                    const totalText = (buffetCell + " , " + jeuxCell);
+
+                    // On incrémente le compteur si le mot clé apparaît dans la ligne Excel
+                    buffetItems.concat(jeuxItems).forEach(item => {
+                        if (totalText.includes(item.title)) {
+                            globalCounts[item.title] = (globalCounts[item.title] || 0) + 1;
+                        }
+                    });
+                });
+
+                // Mise à jour visuelle des petits compteurs et badges sur le site
+                updateVisualBadges('buffet-container', buffetItems);
+                updateVisualBadges('jeux-container', jeuxItems);
+            })
+            .catch(err => console.log("Calcul des doublons en attente..."));
+        }
+
+        function updateVisualBadges(containerId, items) {
+            items.forEach((item, index) => {
+                const badge = document.getElementById(`badge-${containerId}-${index}`);
+                const count = globalCounts[item.title] || 0;
+                if (count === 0) {
+                    badge.className = "text-[10px] font-semibold text-gray-400 italic pl-7";
+                    badge.innerHTML = `👀 0 clic pour l'instant`;
+                } else if (count >= 2) {
+                    badge.className = "text-[10px] font-bold text-red-600 pl-7";
+                    badge.innerHTML = `⚠️ ${count} clics ! Déjà ${count} personnes sur le coup, évite si possible !`;
+                } else {
+                    badge.className = "text-[10px] font-medium text-amber-600 pl-7 italic";
+                    badge.innerHTML = `✅ 1 clic, déjà 1 personne apporte ça.`;
+                }
+            });
+        }
+
+        // Lancement de l'analyse automatique dès que la page s'ouvre
+        window.onload = loadLiveExcelData;
+
+        const excuses = ["« J'ai dû repasser la nappe. »", "« Mon plaid est allergique à l'herbe. »", "« Je peaufinais mes gestes d'italien avec les mains. »"];
+        function generateExcuse() { document.getElementById('excuse-box').innerHTML = excuses[Math.floor(Math.random() * excuses.length)]; }
+
+        let isPlaying = false;
+        function handleFestiveClick(event) {
+            const audio = document.getElementById('sara-audio');
+            const btnText = document.getElementById('button-text');
+            const btn = document.getElementById('trigger-button');
+            if (!isPlaying) {
+                audio.play().catch(err => console.log("Audio forcé")); isPlaying = true;
+                btn.classList.replace('bg-[#2e4a3f]', 'bg-[#b85a3a]'); btnText.innerHTML = "⏸️ PAUSE LA MUSIQUE DE LA BARTESA";
+            } else {
+                audio.pause(); isPlaying = false;
+                btnText.innerHTML = "📋 CONFIRMER MA PRÉSENCE SUR LE REGISTRE"; btn.classList.replace('bg-[#b85a3a]', 'bg-[#2e4a3f]');
+            }
+            launchMegaExplosion(event);
+        }
+
+        function sendDataToGoogleSheetInvisible(event) {
+            launchMegaExplosion(event);
+            
+            let buffetData = [];
+            document.querySelectorAll('#buffet-container .flex-col').forEach(row => {
+                let check = row.querySelector('.list-checkbox').checked;
+                let name = row.querySelector('.list-name').value.trim();
+                let label = row.querySelector('.list-checkbox').getAttribute('data-label');
+                if(check || name !== "") buffetData.push(`${label} (${name || 'Anonyme'})`);
+            });
+
+            let jeuxData = [];
+            document.querySelectorAll('#jeux-container .flex-col').forEach(row => {
+                let check = row.querySelector('.list-checkbox').checked;
+                let name = row.querySelector('.list-name').value.trim();
+                let label = row.querySelector('.list-checkbox').getAttribute('data-label');
+                if(check || name !== "") jeuxData.push(`${label} (${name || 'Anonyme'})`);
+            });
+
+            let pm = document.getElementById('pari-molkky-voter').value + " -> " + document.getElementById('pari-molkky-target').value;
+            let pp = document.getElementById('pari-prosecco-voter').value + " -> " + document.getElementById('pari-prosecco-target').value;
+            let pl = document.getElementById('pari-plaid-voter').value + " -> " + document.getElementById('pari-plaid-target').value;
+            let triche = document.getElementById('triche-input').value;
+            let musique = document.getElementById('musique-input').value;
+
+            let urlWithParams = GOOGLE_SCRIPT_URL +
+                "?buffet=" + encodeURIComponent(buffetData.join(', ') || 'Rien') +
+                "&jeux=" + encodeURIComponent(jeuxData.join(', ') || 'Rien') +
+                "&molkky=" + encodeURIComponent(pm !== " -> " ? pm : 'Pas de vote') +
+                "&prosecco=" + encodeURIComponent(pp !== " -> " ? pp : 'Pas de vote') +
+                "&plaid=" + encodeURIComponent(pl !== " -> " ? pl : 'Pas de vote') +
+                "&triche=" + encodeURIComponent(triche || 'Aucun soupçon') +
+                "&musique=" + encodeURIComponent(musique || 'Pas de suggestion');
+
+            fetch(urlWithParams, { method: "POST" })
+            .then(res => res.json())
+            .then(data => {
+                alert("👑 Choix et pronostics validés à la Cour Royale ! C'est écrit dans le grimoire de Simone.");
+                loadLiveExcelData(); // Recharge les compteurs instantanément après l'envoi
+            })
+            .catch(err => {
+                alert("👑 Choix et pronostics validés à la Cour Royale ! C'est écrit dans le grimoire de Simone.");
+                setTimeout(loadLiveExcelData, 1500);
+            });
+        }
+
+        function launchMegaExplosion(event) {
+            const symbols = ['🍹', '👑', '🥂', '🍾', '🎉', '✨', '🎵', '❤️'];
+            const rect = event.currentTarget.getBoundingClientRect();
+            for (let i = 0; i < 40; i++) {
+                const p = document.createElement('div'); p.classList.add('mega-confetti');
+                p.innerHTML = symbols[Math.floor(Math.random() * symbols.length)];
+                p.style.left = (rect.left + rect.width / 2) + 'px'; p.style.top = (rect.top + rect.height / 2) + 'px';
+                let angle = Math.random() * Math.PI * 2, dist = 100 + Math.random() * 200;
+                p.style.setProperty('--x', Math.cos(angle) * dist + 'px'); p.style.setProperty('--y', Math.sin(angle) * dist + 'px');
+                p.style.setProperty('--scale', 1 + Math.random() * 1.5); p.style.setProperty('--rotate', (Math.random() * 360) + 'deg');
+                p.style.fontSize = '24px'; document.body.appendChild(p); setTimeout(() => p.remove(), 1800);
+            }
+        }
+
+        function getLiveLocation() {
+            const status = document.getElementById('geoloc-status');
+            status.innerHTML = "📍 Calcul en cours...";
+            setTimeout(() => { status.innerHTML = "📍 Tu es à environ 450 mètres de Simone ! Lève les yeux de ton écran !"; }, 1000);
+        }
+    </script>
+</body>
+</html>
