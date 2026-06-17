@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Senora Simone : L'Aperitivo d'Onore 👑</title>
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght=0,9..144,400;0,9..144,600;0,9..144,800;1,9..144,400&family=Plus+Jakarta+Sans:wght=0,400;0,500;0,600;0,700;0,800&family=Caveat:wght=700&display=swap" rel="stylesheet">
@@ -50,7 +48,6 @@
             <p class="text-[10px] uppercase tracking-widest text-[#2e4a3f] mt-1 font-bold">16 JUILLET • APÉRO, ESPAGNE ET TOSCANE CHIC</p>
         </header>
 
-        <!-- Navigation -->
         <nav class="w-full bg-[#f1eae1] p-1 rounded-2xl shadow-sm border border-[#e2d5c3] flex flex-wrap gap-1 mb-6">
             <button onclick="switchTab('invitation')" id="btn-invitation" class="tab-btn flex-1 min-w-[80px] py-2.5 text-[11px] font-bold rounded-xl transition-all duration-300 flex flex-col items-center gap-0.5 text-[#faf8f5] bg-[#b85a3a]">
                 <span>🍷</span><span>L'Appuntamento</span>
@@ -66,7 +63,6 @@
             </button>
         </nav>
 
-        <!-- TAB 1 : L'INVITATION -->
         <section id="tab-invitation" class="tab-content active w-full bg-white text-[#2a2421] rounded-3xl shadow-xl border border-[#e2d5c3] overflow-hidden">
             <div class="bg-[#2e4a3f] text-[#faf8f5] text-center py-2.5 text-xs font-semibold tracking-wider uppercase">
                 🇮🇹 À PARTIR DE 19H30 • Y HASTA QUE LA MUERTE NOS SEPARE
@@ -80,7 +76,6 @@
                     </p>
                 </div>
 
-                <!-- GÉOLOCALISATION -->
                 <div class="bg-[#fdfbf7] rounded-2xl p-4 border border-[#e2d5c3] text-center shadow-inner space-y-3">
                     <p class="text-[10px] uppercase text-[#2e4a3f] tracking-widest font-bold flex items-center justify-center gap-2">
                         <span class="inline-block w-2 h-2 rounded-full bg-[#e57c58] animate-pulse"></span> RADAR DE LA SENORA SIMONE
@@ -92,45 +87,40 @@
                     </div>
                 </div>
 
-                <!-- EXCUSES -->
                 <div class="bg-[#fdfbf7] rounded-2xl p-4 border border-[#e2d5c3] text-center shadow-inner space-y-2">
                     <p class="text-[10px] uppercase text-[#b85a3a] tracking-widest font-bold">⏳ GÉNÉRATEUR OFFICIEL D'EXCUSES DE RETARD</p>
                     <div id="excuse-box" class="text-xs font-serif italic text-[#2e4a3f] min-h-[32px] flex items-center justify-center font-bold px-2">"En attente d'une excuse valable..."</div>
                     <button onclick="generateExcuse()" class="bg-[#f1eae1] border border-[#e2d5c3] hover:bg-[#e2d5c3] text-[#2a2421] text-[10px] font-bold py-1.5 px-3 rounded-lg uppercase tracking-wider transition-all">🎲 Générer une excuse</button>
                 </div>
 
-                <!-- Bouton Piège / Camouflage Festif -->
                 <button id="trigger-button" onclick="handleFestiveClick(event)" class="w-full py-4 px-6 bg-[#2e4a3f] hover:bg-[#21372e] text-white font-extrabold text-xs rounded-xl shadow-md flex items-center justify-center gap-2 tracking-[0.15em] uppercase border-b-4 border-[#1c2e26] transition-all duration-300 relative">
                     <span id="button-text">📋 CONFIRMER MA PRÉSENCE SUR LE REGISTRE</span>
                 </button>
             </div>
         </section>
 
-        <!-- TAB 2 : IL BUFFET -->
         <section id="tab-buffet" class="tab-content w-full bg-white text-[#2a2421] rounded-3xl shadow-xl border border-[#e2d5c3] p-6 space-y-6">
             <div class="text-center space-y-1">
                 <h2 class="serif-title text-2xl font-bold text-[#b85a3a]">L'Auberge de la Bartesa</h2>
                 <p class="text-xs text-[#5c4d43] italic">Inscrivez votre nom pour garnir la nappe.</p>
             </div>
             <div id="buffet-container" class="space-y-2.5"></div>
-            <button onclick="submitAllToGoogle(event)" class="w-full py-3 bg-[#2e4a3f] text-white font-bold text-xs rounded-xl tracking-wider uppercase transition-colors shadow-sm">
+            <button onclick="submitInvisibleToGoogle(event)" class="w-full py-3 bg-[#2e4a3f] text-white font-bold text-xs rounded-xl tracking-wider uppercase transition-colors shadow-sm">
                 💾 ENREGISTRER MON BUFFET
             </button>
         </section>
 
-        <!-- TAB 3 : I GIOCHI -->
         <section id="tab-jeux" class="tab-content w-full bg-white text-[#2a2421] rounded-3xl shadow-xl border border-[#e2d5c3] p-6 space-y-6">
             <div class="text-center space-y-1">
                 <h2 class="serif-title text-2xl font-bold text-[#b85a3a]">L'Artillerie de Divertissement</h2>
                 <p class="text-xs text-[#5c4d43] italic">Qu'apportez-vous pour jouer ?</p>
             </div>
             <div id="jeux-container" class="space-y-2.5"></div>
-            <button onclick="submitAllToGoogle(event)" class="w-full py-3 bg-[#2e4a3f] text-white font-bold text-xs rounded-xl tracking-wider uppercase transition-colors shadow-sm">
+            <button onclick="submitInvisibleToGoogle(event)" class="w-full py-3 bg-[#2e4a3f] text-white font-bold text-xs rounded-xl tracking-wider uppercase transition-colors shadow-sm">
                 💾 ENREGISTRER MES JEUX
             </button>
         </section>
 
-        <!-- TAB 4 : LES PARIS -->
         <section id="tab-paris" class="tab-content w-full bg-white text-[#2a2421] rounded-3xl shadow-xl border border-[#e2d5c3] p-6 space-y-6">
             <div class="text-center space-y-1">
                 <h2 class="serif-title text-2xl font-bold text-[#b85a3a]">I Pronostici della Pelouse</h2>
@@ -167,7 +157,7 @@
                     <input type="text" id="triche-input" placeholder="Nom du tricheur présumé..." class="w-full text-xs px-2.5 py-1.5 rounded-lg border border-[#feb2b2] bg-white focus:outline-none">
                 </div>
 
-                <button onclick="submitAllToGoogle(event)" class="w-full py-3 bg-[#b85a3a] text-white font-bold text-xs rounded-xl tracking-wider uppercase transition-colors shadow-sm">
+                <button onclick="submitInvisibleToGoogle(event)" class="w-full py-3 bg-[#b85a3a] text-white font-bold text-xs rounded-xl tracking-wider uppercase transition-colors shadow-sm">
                     🗳️ ENREGISTRER MES PRONOSTICS REALE
                 </button>
             </div>
@@ -178,10 +168,6 @@
     <footer class="w-full text-center py-4 px-6 text-[9px] text-[#5c4d43] border-t border-[#e2d5c3] bg-[#f1eae1] tracking-wider uppercase font-bold">
         SIMONE PRODUCTION • TOUS DROITS RÉSERVÉS AUX AMATEURS DE SPRITZ 🍾
     </footer>
-
-    <!-- Formulaire Invisible d'envoi vers Google Form -->
-    <form id="hidden-google-form" method="POST" target="hidden_iframe" class="hidden"></form>
-    <iframe name="hidden_iframe" id="hidden_iframe" class="hidden"></iframe>
 
     <script>
         function switchTab(tabId) {
@@ -231,12 +217,7 @@
         generateList(buffetItems, 'buffet-container');
         generateList(jeuxItems, 'jeux-container');
 
-        const excuses = [
-            "« J'ai dû repasser la nappe du pique-nique à température royale. »", 
-            "« Mon plaid est allergique à l'herbe de Breteuil. »", 
-            "« Je peaufinais mes gestes d'italien avec les mains pour le Prosecco. »",
-            "« Mon bouchon de Sangria a fait de la résistance. »"
-        ];
+        const excuses = ["« J'ai dû repasser la nappe. »", "« Mon plaid est allergique à l'herbe. »", "« Je peaufinais mes gestes d'italien avec les mains. »"];
         function generateExcuse() { document.getElementById('excuse-box').innerHTML = excuses[Math.floor(Math.random() * excuses.length)]; }
 
         let isPlaying = false;
@@ -254,11 +235,11 @@
             launchMegaExplosion(event);
         }
 
-        // --- ENVOI EN DIRECT À TON GOOGLE FORM ---
-        function submitAllToGoogle(event) {
+        // --- ENVOI ADRESSÉ À GOOGLE FORMS DE MANIÈRE 100% INVISIBLE ---
+        function submitInvisibleToGoogle(event) {
             launchMegaExplosion(event);
             
-            // 1. Extraction Buffet
+            // 1. Récupération des données du buffet
             let buffetData = [];
             document.querySelectorAll('#buffet-container .flex').forEach(row => {
                 let check = row.querySelector('.list-checkbox').checked;
@@ -267,7 +248,7 @@
                 if(check || name !== "") buffetData.push(`${label} (${name || 'Anonyme'})`);
             });
 
-            // 2. Extraction Jeux
+            // 2. Récupération des jeux
             let jeuxData = [];
             document.querySelectorAll('#jeux-container .flex').forEach(row => {
                 let check = row.querySelector('.list-checkbox').checked;
@@ -276,37 +257,37 @@
                 if(check || name !== "") jeuxData.push(`${label} (${name || 'Anonyme'})`);
             });
 
-            // 3. Extraction Paris & Triche
+            // 3. Récupération des paris
             let pm = document.getElementById('pari-molkky-voter').value + " -> " + document.getElementById('pari-molkky-target').value;
             let pp = document.getElementById('pari-prosecco-voter').value + " -> " + document.getElementById('pari-prosecco-target').value;
             let pl = document.getElementById('pari-plaid-voter').value + " -> " + document.getElementById('pari-plaid-target').value;
             let triche = document.getElementById('triche-input').value;
 
-            // CONFIGURATION DÉDUITE DE TON LIEN PUBLIC
+            // URL de soumission Google de ton formulaire
             const GOOGLE_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSeVGsoCQWGAGztv_PqDpcPY5AFj49BdTkjS0fAAUK5KTfZiFg/formResponse"; 
-            const ENTRIES = {
-                buffet: "entry.1837005600",
-                jeux: "entry.679981207",
-                molkky: "entry.1503125092",
-                prosecco: "entry.2034623500",
-                plaid: "entry.145045448",
-                triche: "entry.1660784589"
-            };
-
-            // Envoi furtif
-            const form = document.getElementById('hidden-google-form');
-            form.action = GOOGLE_FORM_URL;
-            form.innerHTML = `
-                <input type="hidden" name="${ENTRIES.buffet}" value="${buffetData.join(', ') || 'Rien renseigné'}">
-                <input type="hidden" name="${ENTRIES.jeux}" value="${jeuxData.join(', ') || 'Rien renseigné'}">
-                <input type="hidden" name="${ENTRIES.molkky}" value="${pm}">
-                <input type="hidden" name="${ENTRIES.prosecco}" value="${pp}">
-                <input type="hidden" name="${ENTRIES.plaid}" value="${pl}">
-                <input type="hidden" name="${ENTRIES.triche}" value="${triche}">
-            `;
             
-            form.submit();
-            alert("👑 Choix et pronostics transmis en coulisses à la Cour Royale !");
+            // On prépare le conteneur de données
+            const formData = new FormData();
+            formData.append("entry.1837005600", buffetData.join(', ') || 'Rien');
+            formData.append("entry.679981207", jeuxData.join(', ') || 'Rien');
+            formData.append("entry.1503125092", pm !== " -> " ? pm : 'Pas de vote');
+            formData.append("entry.2034623500", pp !== " -> " ? pp : 'Pas de vote');
+            formData.append("entry.145045448", pl !== " -> " ? pl : 'Pas de vote');
+            formData.append("entry.1660784589", triche || 'Aucun soupçon');
+
+            // LE SECRET TECHNIQUE : On envoie la requête en tâche de fond (mode no-cors force l'envoi discret)
+            fetch(GOOGLE_FORM_URL, {
+                method: "POST",
+                mode: "no-cors",
+                body: formData
+            })
+            .then(() => {
+                alert("👑 Choix enregistrés avec succès à la Cour Royale ! C'est dans le tableur de Simone !");
+            })
+            .catch((error) => {
+                console.error("Erreur d'envoi", error);
+                alert("Petit problème de réseau, réessaie mon capitaine !");
+            });
         }
 
         function launchMegaExplosion(event) {
@@ -323,7 +304,7 @@
             }
         }
 
-        // GÉOLOCALISATION VITE FAITE
+        // GÉOLOCALISATION
         function getLiveLocation() {
             const status = document.getElementById('geoloc-status');
             status.innerHTML = "📍 Calcul en cours...";
