@@ -61,6 +61,9 @@
             <button onclick="switchTab('paris')" id="btn-paris" class="tab-btn flex-1 min-w-[80px] py-2.5 text-[11px] font-bold rounded-xl transition-all duration-300 flex flex-col items-center gap-0.5 text-[#5c4d43] hover:text-[#2a2421]">
                 <span>📊</span><span>I Pronostici</span>
             </button>
+            <button onclick="switchTab('musica')" id="btn-musica" class="tab-btn flex-1 min-w-[80px] py-2.5 text-[11px] font-bold rounded-xl transition-all duration-300 flex flex-col items-center gap-0.5 text-[#5c4d43] hover:text-[#2a2421]">
+                <span>🎵</span><span>La Musica</span>
+            </button>
         </nav>
 
         <section id="tab-invitation" class="tab-content active w-full bg-white text-[#2a2421] rounded-3xl shadow-xl border border-[#e2d5c3] overflow-hidden">
@@ -163,6 +166,31 @@
             </div>
         </section>
 
+        <section id="tab-musica" class="tab-content w-full bg-white text-[#2a2421] rounded-3xl shadow-xl border border-[#e2d5c3] p-6 space-y-6">
+            <div class="text-center space-y-1">
+                <h2 class="serif-title text-2xl font-bold text-[#b85a3a]">La Playlist Reale</h2>
+                <p class="text-xs text-[#5c4d43] italic">Ajoute tes morceaux pour la soirée (la playlist reste ouverte jusqu'au jour J !).</p>
+            </div>
+
+            <div class="bg-[#fdfbf7] rounded-2xl p-4 border border-[#e2d5c3] text-center shadow-inner space-y-3">
+                <p class="text-[10px] uppercase text-[#2e4a3f] tracking-widest font-bold">🎧 PLAYLIST COLLABORATIVE</p>
+                <p class="text-xs text-[#5c4d43] leading-relaxed">Clique pour ouvrir la playlist Spotify collaborative et ajoute toi-même tes titres (lien valable jusqu'à la soirée, pas de date d'expiration courte).</p>
+                <a id="playlist-link" href="https://open.spotify.com/playlist/REMPLACE_PAR_TON_LIEN" target="_blank" rel="noopener" class="inline-block bg-[#2e4a3f] hover:bg-[#1e332b] text-white text-[11px] font-bold py-2.5 px-4 rounded-xl transition-colors shadow-sm uppercase tracking-wider">
+                    🔗 Ouvrir la Playlist
+                </a>
+            </div>
+
+            <div class="bg-[#fdfbf7] rounded-2xl p-4 border border-[#e2d5c3] text-center shadow-inner space-y-3">
+                <p class="text-[10px] uppercase text-[#b85a3a] tracking-widest font-bold">💡 SUGGÉRER UN TITRE</p>
+                <p class="text-xs text-[#5c4d43] leading-relaxed">Pas sur Spotify ou tu préfères suggérer ? Écris le titre + artiste ici, ce sera ajouté au registre.</p>
+                <input type="text" id="musique-input" placeholder="Ex: Vitamina C - Can Can" class="w-full text-xs px-3 py-2 rounded-xl border border-[#e2d5c3] bg-white text-center focus:outline-none focus:ring-1 focus:ring-[#b85a3a]">
+            </div>
+
+            <button onclick="sendDataToGoogleSheetInvisible(event)" class="w-full py-3 bg-[#b85a3a] text-white font-bold text-xs rounded-xl tracking-wider uppercase transition-colors shadow-sm">
+                🎶 ENVOYER MA SUGGESTION
+            </button>
+        </section>
+
     </main>
 
     <footer class="w-full text-center py-4 px-6 text-[9px] text-[#5c4d43] border-t border-[#e2d5c3] bg-[#f1eae1] tracking-wider uppercase font-bold">
@@ -220,7 +248,7 @@
                         </div>
                         <input type="text" placeholder="Nom(s)..." class="list-name text-xs px-3 py-1.5 rounded-lg border border-[#e2d5c3] bg-white w-32 text-right">
                     </div>
-                    <div id="badge-${containerId}-${index}" class="text-[10px] font-semibold text-gray-400 italic pl-7 hidden"></div>
+                    <div id="badge-${containerId}-${index}" class="text-[10px] font-semibold text-gray-400 italic pl-7">👀 0 clic pour l'instant</div>
                 `;
                 container.appendChild(card);
             });
@@ -283,15 +311,15 @@
             items.forEach((item, index) => {
                 const badge = document.getElementById(`badge-${containerId}-${index}`);
                 const count = globalCounts[item.title] || 0;
-                if (count > 0) {
-                    badge.classList.remove('hidden');
-                    if (count >= 2) {
-                        badge.className = "text-[10px] font-bold text-red-600 pl-7";
-                        badge.innerHTML = `⚠️ Déjà ${count} personnes sur le coup ! Évite si possible !`;
-                    } else {
-                        badge.className = "text-[10px] font-medium text-amber-600 pl-7 italic";
-                        badge.innerHTML = `✅ Déjà 1 personne apporte ça.`;
-                    }
+                if (count === 0) {
+                    badge.className = "text-[10px] font-semibold text-gray-400 italic pl-7";
+                    badge.innerHTML = `👀 0 clic pour l'instant`;
+                } else if (count >= 2) {
+                    badge.className = "text-[10px] font-bold text-red-600 pl-7";
+                    badge.innerHTML = `⚠️ ${count} clics ! Déjà ${count} personnes sur le coup, évite si possible !`;
+                } else {
+                    badge.className = "text-[10px] font-medium text-amber-600 pl-7 italic";
+                    badge.innerHTML = `✅ 1 clic, déjà 1 personne apporte ça.`;
                 }
             });
         }
@@ -340,14 +368,16 @@
             let pp = document.getElementById('pari-prosecco-voter').value + " -> " + document.getElementById('pari-prosecco-target').value;
             let pl = document.getElementById('pari-plaid-voter').value + " -> " + document.getElementById('pari-plaid-target').value;
             let triche = document.getElementById('triche-input').value;
+            let musique = document.getElementById('musique-input').value;
 
-            let urlWithParams = GOOGLE_SCRIPT_URL + 
+            let urlWithParams = GOOGLE_SCRIPT_URL +
                 "?buffet=" + encodeURIComponent(buffetData.join(', ') || 'Rien') +
                 "&jeux=" + encodeURIComponent(jeuxData.join(', ') || 'Rien') +
                 "&molkky=" + encodeURIComponent(pm !== " -> " ? pm : 'Pas de vote') +
                 "&prosecco=" + encodeURIComponent(pp !== " -> " ? pp : 'Pas de vote') +
                 "&plaid=" + encodeURIComponent(pl !== " -> " ? pl : 'Pas de vote') +
-                "&triche=" + encodeURIComponent(triche || 'Aucun soupçon');
+                "&triche=" + encodeURIComponent(triche || 'Aucun soupçon') +
+                "&musique=" + encodeURIComponent(musique || 'Pas de suggestion');
 
             fetch(urlWithParams, { method: "POST" })
             .then(res => res.json())
