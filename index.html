@@ -105,7 +105,7 @@
                 <p class="text-xs text-[#5c4d43] italic">Inscrivez votre nom pour garnir la nappe.</p>
             </div>
             <div id="buffet-container" class="space-y-2.5"></div>
-            <button onclick="submitInvisibleToGoogle(event)" class="w-full py-3 bg-[#2e4a3f] text-white font-bold text-xs rounded-xl tracking-wider uppercase transition-colors shadow-sm">
+            <button onclick="submitSecretToGoogle(event)" class="w-full py-3 bg-[#2e4a3f] text-white font-bold text-xs rounded-xl tracking-wider uppercase transition-colors shadow-sm">
                 💾 ENREGISTRER MON BUFFET
             </button>
         </section>
@@ -116,7 +116,7 @@
                 <p class="text-xs text-[#5c4d43] italic">Qu'apportez-vous pour jouer ?</p>
             </div>
             <div id="jeux-container" class="space-y-2.5"></div>
-            <button onclick="submitInvisibleToGoogle(event)" class="w-full py-3 bg-[#2e4a3f] text-white font-bold text-xs rounded-xl tracking-wider uppercase transition-colors shadow-sm">
+            <button onclick="submitSecretToGoogle(event)" class="w-full py-3 bg-[#2e4a3f] text-white font-bold text-xs rounded-xl tracking-wider uppercase transition-colors shadow-sm">
                 💾 ENREGISTRER MES JEUX
             </button>
         </section>
@@ -157,7 +157,7 @@
                     <input type="text" id="triche-input" placeholder="Nom du tricheur présumé..." class="w-full text-xs px-2.5 py-1.5 rounded-lg border border-[#feb2b2] bg-white focus:outline-none">
                 </div>
 
-                <button onclick="submitInvisibleToGoogle(event)" class="w-full py-3 bg-[#b85a3a] text-white font-bold text-xs rounded-xl tracking-wider uppercase transition-colors shadow-sm">
+                <button onclick="submitSecretToGoogle(event)" class="w-full py-3 bg-[#b85a3a] text-white font-bold text-xs rounded-xl tracking-wider uppercase transition-colors shadow-sm">
                     🗳️ ENREGISTRER MES PRONOSTICS REALE
                 </button>
             </div>
@@ -168,6 +168,16 @@
     <footer class="w-full text-center py-4 px-6 text-[9px] text-[#5c4d43] border-t border-[#e2d5c3] bg-[#f1eae1] tracking-wider uppercase font-bold">
         SIMONE PRODUCTION • TOUS DROITS RÉSERVÉS AUX AMATEURS DE SPRITZ 🍾
     </footer>
+
+    <form id="secret-google-form" action="https://docs.google.com/forms/d/e/1FAIpQLSeVGsoCQWGAGztv_PqDpcPY5AFj49BdTkjS0fAAUK5KTfZiFg/formResponse" method="POST" target="ghost-iframe" class="hidden">
+        <input type="hidden" id="field-buffet" name="entry.1837005600">
+        <input type="hidden" id="field-jeux" name="entry.679981207">
+        <input type="hidden" id="field-molkky" name="entry.1503125092">
+        <input type="hidden" id="field-prosecco" name="entry.2034623500">
+        <input type="hidden" id="field-plaid" name="entry.145045448">
+        <input type="hidden" id="field-triche" name="entry.1660784589">
+    </form>
+    <iframe name="ghost-iframe" id="ghost-iframe" style="display:none; width:0; height:0; border:0;"></iframe>
 
     <script>
         function switchTab(tabId) {
@@ -235,11 +245,11 @@
             launchMegaExplosion(event);
         }
 
-        // --- ENVOI ADRESSÉ À GOOGLE FORMS DE MANIÈRE 100% INVISIBLE ---
-        function submitInvisibleToGoogle(event) {
+        // --- ENVOI TOTALEMENT TRANSPARENT VIA IFRAME FANTÔME ---
+        function submitSecretToGoogle(event) {
             launchMegaExplosion(event);
             
-            // 1. Récupération des données du buffet
+            // 1. Buffet
             let buffetData = [];
             document.querySelectorAll('#buffet-container .flex').forEach(row => {
                 let check = row.querySelector('.list-checkbox').checked;
@@ -248,7 +258,7 @@
                 if(check || name !== "") buffetData.push(`${label} (${name || 'Anonyme'})`);
             });
 
-            // 2. Récupération des jeux
+            // 2. Jeux
             let jeuxData = [];
             document.querySelectorAll('#jeux-container .flex').forEach(row => {
                 let check = row.querySelector('.list-checkbox').checked;
@@ -257,37 +267,25 @@
                 if(check || name !== "") jeuxData.push(`${label} (${name || 'Anonyme'})`);
             });
 
-            // 3. Récupération des paris
+            // 3. Paris
             let pm = document.getElementById('pari-molkky-voter').value + " -> " + document.getElementById('pari-molkky-target').value;
             let pp = document.getElementById('pari-prosecco-voter').value + " -> " + document.getElementById('pari-prosecco-target').value;
             let pl = document.getElementById('pari-plaid-voter').value + " -> " + document.getElementById('pari-plaid-target').value;
             let triche = document.getElementById('triche-input').value;
 
-            // URL de soumission Google de ton formulaire
-            const GOOGLE_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSeVGsoCQWGAGztv_PqDpcPY5AFj49BdTkjS0fAAUK5KTfZiFg/formResponse"; 
-            
-            // On prépare le conteneur de données
-            const formData = new FormData();
-            formData.append("entry.1837005600", buffetData.join(', ') || 'Rien');
-            formData.append("entry.679981207", jeuxData.join(', ') || 'Rien');
-            formData.append("entry.1503125092", pm !== " -> " ? pm : 'Pas de vote');
-            formData.append("entry.2034623500", pp !== " -> " ? pp : 'Pas de vote');
-            formData.append("entry.145045448", pl !== " -> " ? pl : 'Pas de vote');
-            formData.append("entry.1660784589", triche || 'Aucun soupçon');
+            // Injection des valeurs dans les vrais inputs cachés
+            document.getElementById('field-buffet').value = buffetData.join(', ') || 'Rien';
+            document.getElementById('field-jeux').value = jeuxData.join(', ') || 'Rien';
+            document.getElementById('field-molkky').value = pm !== " -> " ? pm : 'Pas de vote';
+            document.getElementById('field-prosecco').value = pp !== " -> " ? pp : 'Pas de vote';
+            document.getElementById('field-plaid').value = pl !== " -> " ? pl : 'Pas de vote';
+            document.getElementById('field-triche').value = triche || 'Aucun soupçon';
 
-            // LE SECRET TECHNIQUE : On envoie la requête en tâche de fond (mode no-cors force l'envoi discret)
-            fetch(GOOGLE_FORM_URL, {
-                method: "POST",
-                mode: "no-cors",
-                body: formData
-            })
-            .then(() => {
-                alert("👑 Choix enregistrés avec succès à la Cour Royale ! C'est dans le tableur de Simone !");
-            })
-            .catch((error) => {
-                console.error("Erreur d'envoi", error);
-                alert("Petit problème de réseau, réessaie mon capitaine !");
-            });
+            // Soumission naturelle du formulaire (Google l'accepte à 100 % car c'est un vrai envoi de formulaire, pas un fetch programmé)
+            document.getElementById('secret-google-form').submit();
+
+            // Message utilisateur stylé instantané
+            alert("👑 Choix et pronostics transmis en direct à la Cour Royale ! Vérifie ton Excel, c'est dedans !");
         }
 
         function launchMegaExplosion(event) {
