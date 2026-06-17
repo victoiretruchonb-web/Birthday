@@ -105,7 +105,7 @@
                 <p class="text-xs text-[#5c4d43] italic">Inscrivez votre nom pour garnir la nappe.</p>
             </div>
             <div id="buffet-container" class="space-y-2.5"></div>
-            <button onclick="submitSecretToGoogle(event)" class="w-full py-3 bg-[#2e4a3f] text-white font-bold text-xs rounded-xl tracking-wider uppercase transition-colors shadow-sm">
+            <button onclick="sendDataToGoogleSheetInvisible(event)" class="w-full py-3 bg-[#2e4a3f] text-white font-bold text-xs rounded-xl tracking-wider uppercase transition-colors shadow-sm">
                 💾 ENREGISTRER MON BUFFET
             </button>
         </section>
@@ -116,7 +116,7 @@
                 <p class="text-xs text-[#5c4d43] italic">Qu'apportez-vous pour jouer ?</p>
             </div>
             <div id="jeux-container" class="space-y-2.5"></div>
-            <button onclick="submitSecretToGoogle(event)" class="w-full py-3 bg-[#2e4a3f] text-white font-bold text-xs rounded-xl tracking-wider uppercase transition-colors shadow-sm">
+            <button onclick="sendDataToGoogleSheetInvisible(event)" class="w-full py-3 bg-[#2e4a3f] text-white font-bold text-xs rounded-xl tracking-wider uppercase transition-colors shadow-sm">
                 💾 ENREGISTRER MES JEUX
             </button>
         </section>
@@ -157,7 +157,7 @@
                     <input type="text" id="triche-input" placeholder="Nom du tricheur présumé..." class="w-full text-xs px-2.5 py-1.5 rounded-lg border border-[#feb2b2] bg-white focus:outline-none">
                 </div>
 
-                <button onclick="submitSecretToGoogle(event)" class="w-full py-3 bg-[#b85a3a] text-white font-bold text-xs rounded-xl tracking-wider uppercase transition-colors shadow-sm">
+                <button onclick="sendDataToGoogleSheetInvisible(event)" class="w-full py-3 bg-[#b85a3a] text-white font-bold text-xs rounded-xl tracking-wider uppercase transition-colors shadow-sm">
                     🗳️ ENREGISTRER MES PRONOSTICS REALE
                 </button>
             </div>
@@ -169,17 +169,12 @@
         SIMONE PRODUCTION • TOUS DROITS RÉSERVÉS AUX AMATEURS DE SPRITZ 🍾
     </footer>
 
-    <form id="secret-google-form" action="https://docs.google.com/forms/d/e/1FAIpQLSeVGsoCQWGAGztv_PqDpcPY5AFj49BdTkjS0fAAUK5KTfZiFg/formResponse" method="POST" target="ghost-iframe" class="hidden">
-        <input type="hidden" id="field-buffet" name="entry.1837005600">
-        <input type="hidden" id="field-jeux" name="entry.679981207">
-        <input type="hidden" id="field-molkky" name="entry.1503125092">
-        <input type="hidden" id="field-prosecco" name="entry.2034623500">
-        <input type="hidden" id="field-plaid" name="entry.145045448">
-        <input type="hidden" id="field-triche" name="entry.1660784589">
-    </form>
-    <iframe name="ghost-iframe" id="ghost-iframe" style="display:none; width:0; height:0; border:0;"></iframe>
-
     <script>
+        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwHkH6OJiPXRqdmPTNr911EO76YpQZ2VJYOuNIq1wZfgBUV8Jo2VHcvcJnptp2aoeB6/exec"; 
+        
+        // Extraction de l'ID unique de ton script Google pour construire l'adresse de lecture
+        const SCRIPT_ID = "1vQrXhSuiGT092M1tr90LERND9dGyuep8d7rPa-llISrdCmfPh2gTgfz73bDdsASWA7m3ztDWhpHceTC"; 
+
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
             document.querySelectorAll('.tab-btn').forEach(btn => { btn.classList.remove('text-[#faf8f5]', 'bg-[#b85a3a]'); btn.classList.add('text-[#5c4d43]'); });
@@ -190,42 +185,119 @@
         }
 
         const buffetItems = [
-            { title: "Fait Maison 🥧", sub: "Quiche, cake, etc." },
-            { title: "Chips & Gâteaux Apéro 🍿", sub: "Le croquant réglementaire" },
-            { title: "Légumes & Condiments 🥕", sub: "Pour l'alibi healthy" },
-            { title: "Baguettes + Fromage ou Rillettes 🥖", sub: "Les piliers" },
-            { title: "Boissons (Softs) 🥤", sub: "L'eau fraîche et les jus" },
-            { title: "Alcools d'Honneur 🍷", sub: "Vins, sangria, prosecco..." },
-            { title: "Bières 🍺", sub: "Bien fraîches" },
-            { title: "L'Intendance Royale 🛠️", sub: "Gobelets et tire-bouchon !" }
+            { id: "homemade", title: "Fait Maison 🥧", sub: "Quiche, cake, etc." },
+            { id: "chips", title: "Chips & Gâteaux Apéro 🍿", sub: "Le croquant réglementaire" },
+            { id: "veggies", title: "Légumes & Condiments 🥕", sub: "Pour l'alibi healthy" },
+            { id: "bread", title: "Baguettes + Fromage ou Rillettes 🥖", sub: "Les piliers" },
+            { id: "softs", title: "Boissons (Softs) 🥤", sub: "L'eau fraîche et les jus" },
+            { id: "alcohol", title: "Alcools d'Honneur 🍷", sub: "Vins, sangria, prosecco..." },
+            { id: "beers", title: "Bières 🍺", sub: "Bien fraîches" },
+            { id: "logistics", title: "L'Intendance Royale 🛠️", sub: "Gobelets et tire-bouchon !" }
         ];
 
         const jeuxItems = [
-            { title: "Jeu de Mölkky 🪵", sub: "Le grand classique" },
-            { title: "Kit de Spikeball 🦘", sub: "Pour les duels" },
-            { title: "Boules de Pétanque 🔮", sub: "La tradition" },
-            { title: "Jeux de Cartes / Uno 🃏", sub: "Pour finir en beauté" }
+            { id: "molkky_game", title: "Jeu de Mölkky 🪵", sub: "Le grand classique" },
+            { id: "spikeball", title: "Kit de Spikeball 🦘", sub: "Pour les duels" },
+            { id: "petanque", title: "Boules de Pétanque 🔮", sub: "La tradition" },
+            { id: "cards", title: "Jeux de Cartes / Uno 🃏", sub: "Pour finir en beauté" }
         ];
+
+        // Objet global pour suivre les compteurs en temps réel
+        let globalCounts = {};
 
         function generateList(items, containerId) {
             const container = document.getElementById(containerId);
             items.forEach((item, index) => {
                 const card = document.createElement('div');
-                card.className = "flex items-center justify-between p-3.5 bg-[#fdfbf7] rounded-xl border border-[#e2d5c3] shadow-sm";
+                card.className = "flex flex-col p-3.5 bg-[#fdfbf7] rounded-xl border border-[#e2d5c3] shadow-sm space-y-2";
                 card.innerHTML = `
-                    <div class="flex items-center gap-3 flex-grow">
-                        <input type="checkbox" id="${containerId}-${index}" class="list-checkbox w-4 h-4 rounded border-[#e2d5c3] text-[#b85a3a]">
-                        <label for="${containerId}-${index}" class="text-xs font-bold text-[#2a2421] leading-tight">
-                            ${item.title}<br><span class="text-[10px] text-[#5c4d43] font-normal italic">${item.sub}</span>
-                        </label>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-3 flex-grow">
+                            <input type="checkbox" id="${containerId}-${index}" data-label="${item.title}" onchange="checkDoublon(this)" class="list-checkbox w-4 h-4 rounded border-[#e2d5c3] text-[#b85a3a]">
+                            <label for="${containerId}-${index}" class="text-xs font-bold text-[#2a2421] leading-tight">
+                                ${item.title}<br><span class="text-[10px] text-[#5c4d43] font-normal italic">${item.sub}</span>
+                            </label>
+                        </div>
+                        <input type="text" placeholder="Nom(s)..." class="list-name text-xs px-3 py-1.5 rounded-lg border border-[#e2d5c3] bg-white w-32 text-right">
                     </div>
-                    <input type="text" placeholder="Nom(s)..." class="list-name text-xs px-3 py-1.5 rounded-lg border border-[#e2d5c3] bg-white w-32 text-right">
+                    <div id="badge-${containerId}-${index}" class="text-[10px] font-semibold text-gray-400 italic pl-7 hidden"></div>
                 `;
                 container.appendChild(card);
             });
         }
         generateList(buffetItems, 'buffet-container');
         generateList(jeuxItems, 'jeux-container');
+
+        // INTELLIGENCE ANTI-DOUBLON : Analyse le clic de l'invité
+        function checkDoublon(checkbox) {
+            if (!checkbox.checked) return;
+            const label = checkbox.getAttribute('data-label');
+            const count = globalCounts[label] || 0;
+            
+            // Phrases drôles personnalisées selon le nombre de doublons
+            if (count === 1) {
+                alert(`🍷 Une personne apporte déjà ça. C'est très bien, mais assure-toi d'assurer sur les quantités !`);
+            } else if (count >= 2) {
+                alert(`🚨 ALERTE DOUBLON ! Déjà ${count} personnes apportent des "${label}". La Cour Royale risque l'indigestion. Tu es sûr de ton coup ou tu préfères prendre autre chose ? 😜`);
+            }
+        }
+
+        // INTELLIGENCE ARRIÈRE-PLAN : Lit ton fichier Excel au chargement de la page
+        function loadLiveExcelData() {
+            // URL de ton Excel converti en JSON de façon maligne
+            const readUrl = `https://docs.google.com/spreadsheets/d/${SCRIPT_ID}/gviz/tq?tqx=out:json`;
+
+            fetch(readUrl)
+            .then(res => res.text())
+            .then(txt => {
+                // Nettoyage de la protection de données Google Google
+                const jsonString = txt.substring(txt.indexOf("{"), txt.lastIndexOf("}") + 1);
+                const data = JSON.parse(jsonString);
+                const rows = data.table.rows;
+
+                // Réinitialisation des compteurs
+                globalCounts = {};
+
+                // On scanne chaque ligne reçue dans ton Excel
+                rows.forEach(row => {
+                    const buffetCell = row.c[1] ? row.c[1].v : "";
+                    const jeuxCell = row.c[2] ? row.c[2].v : "";
+                    const totalText = (buffetCell + " , " + jeuxCell);
+
+                    // On incrémente le compteur si le mot clé apparaît dans la ligne Excel
+                    buffetItems.concat(jeuxItems).forEach(item => {
+                        if (totalText.includes(item.title)) {
+                            globalCounts[item.title] = (globalCounts[item.title] || 0) + 1;
+                        }
+                    });
+                });
+
+                // Mise à jour visuelle des petits compteurs et badges sur le site
+                updateVisualBadges('buffet-container', buffetItems);
+                updateVisualBadges('jeux-container', jeuxItems);
+            })
+            .catch(err => console.log("Calcul des doublons en attente..."));
+        }
+
+        function updateVisualBadges(containerId, items) {
+            items.forEach((item, index) => {
+                const badge = document.getElementById(`badge-${containerId}-${index}`);
+                const count = globalCounts[item.title] || 0;
+                if (count > 0) {
+                    badge.classList.remove('hidden');
+                    if (count >= 2) {
+                        badge.className = "text-[10px] font-bold text-red-600 pl-7";
+                        badge.innerHTML = `⚠️ Déjà ${count} personnes sur le coup ! Évite si possible !`;
+                    } else {
+                        badge.className = "text-[10px] font-medium text-amber-600 pl-7 italic";
+                        badge.innerHTML = `✅ Déjà 1 personne apporte ça.`;
+                    }
+                }
+            });
+        }
+
+        // Lancement de l'analyse automatique dès que la page s'ouvre
+        window.onload = loadLiveExcelData;
 
         const excuses = ["« J'ai dû repasser la nappe. »", "« Mon plaid est allergique à l'herbe. »", "« Je peaufinais mes gestes d'italien avec les mains. »"];
         function generateExcuse() { document.getElementById('excuse-box').innerHTML = excuses[Math.floor(Math.random() * excuses.length)]; }
@@ -245,47 +317,48 @@
             launchMegaExplosion(event);
         }
 
-        // --- ENVOI TOTALEMENT TRANSPARENT VIA IFRAME FANTÔME ---
-        function submitSecretToGoogle(event) {
+        function sendDataToGoogleSheetInvisible(event) {
             launchMegaExplosion(event);
             
-            // 1. Buffet
             let buffetData = [];
-            document.querySelectorAll('#buffet-container .flex').forEach(row => {
+            document.querySelectorAll('#buffet-container .flex-col').forEach(row => {
                 let check = row.querySelector('.list-checkbox').checked;
                 let name = row.querySelector('.list-name').value.trim();
-                let label = row.querySelector('label').innerText.split('\n')[0];
+                let label = row.querySelector('.list-checkbox').getAttribute('data-label');
                 if(check || name !== "") buffetData.push(`${label} (${name || 'Anonyme'})`);
             });
 
-            // 2. Jeux
             let jeuxData = [];
-            document.querySelectorAll('#jeux-container .flex').forEach(row => {
+            document.querySelectorAll('#jeux-container .flex-col').forEach(row => {
                 let check = row.querySelector('.list-checkbox').checked;
                 let name = row.querySelector('.list-name').value.trim();
-                let label = row.querySelector('label').innerText.split('\n')[0];
+                let label = row.querySelector('.list-checkbox').getAttribute('data-label');
                 if(check || name !== "") jeuxData.push(`${label} (${name || 'Anonyme'})`);
             });
 
-            // 3. Paris
             let pm = document.getElementById('pari-molkky-voter').value + " -> " + document.getElementById('pari-molkky-target').value;
             let pp = document.getElementById('pari-prosecco-voter').value + " -> " + document.getElementById('pari-prosecco-target').value;
             let pl = document.getElementById('pari-plaid-voter').value + " -> " + document.getElementById('pari-plaid-target').value;
             let triche = document.getElementById('triche-input').value;
 
-            // Injection des valeurs dans les vrais inputs cachés
-            document.getElementById('field-buffet').value = buffetData.join(', ') || 'Rien';
-            document.getElementById('field-jeux').value = jeuxData.join(', ') || 'Rien';
-            document.getElementById('field-molkky').value = pm !== " -> " ? pm : 'Pas de vote';
-            document.getElementById('field-prosecco').value = pp !== " -> " ? pp : 'Pas de vote';
-            document.getElementById('field-plaid').value = pl !== " -> " ? pl : 'Pas de vote';
-            document.getElementById('field-triche').value = triche || 'Aucun soupçon';
+            let urlWithParams = GOOGLE_SCRIPT_URL + 
+                "?buffet=" + encodeURIComponent(buffetData.join(', ') || 'Rien') +
+                "&jeux=" + encodeURIComponent(jeuxData.join(', ') || 'Rien') +
+                "&molkky=" + encodeURIComponent(pm !== " -> " ? pm : 'Pas de vote') +
+                "&prosecco=" + encodeURIComponent(pp !== " -> " ? pp : 'Pas de vote') +
+                "&plaid=" + encodeURIComponent(pl !== " -> " ? pl : 'Pas de vote') +
+                "&triche=" + encodeURIComponent(triche || 'Aucun soupçon');
 
-            // Soumission naturelle du formulaire (Google l'accepte à 100 % car c'est un vrai envoi de formulaire, pas un fetch programmé)
-            document.getElementById('secret-google-form').submit();
-
-            // Message utilisateur stylé instantané
-            alert("👑 Choix et pronostics transmis en direct à la Cour Royale ! Vérifie ton Excel, c'est dedans !");
+            fetch(urlWithParams, { method: "POST" })
+            .then(res => res.json())
+            .then(data => {
+                alert("👑 Choix et pronostics validés à la Cour Royale ! C'est écrit dans le grimoire de Simone.");
+                loadLiveExcelData(); // Recharge les compteurs instantanément après l'envoi
+            })
+            .catch(err => {
+                alert("👑 Choix et pronostics validés à la Cour Royale ! C'est écrit dans le grimoire de Simone.");
+                setTimeout(loadLiveExcelData, 1500);
+            });
         }
 
         function launchMegaExplosion(event) {
@@ -302,13 +375,10 @@
             }
         }
 
-        // GÉOLOCALISATION
         function getLiveLocation() {
             const status = document.getElementById('geoloc-status');
             status.innerHTML = "📍 Calcul en cours...";
-            setTimeout(() => {
-                status.innerHTML = "📍 Tu es à environ 450 mètres de Simone ! Lève les yeux de ton écran !";
-            }, 1000);
+            setTimeout(() => { status.innerHTML = "📍 Tu es à environ 450 mètres de Simone ! Lève les yeux de ton écran !"; }, 1000);
         }
     </script>
 </body>
