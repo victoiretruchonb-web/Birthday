@@ -140,7 +140,7 @@
                 </div>
 
                 <div class="bg-[#fdfbf7] p-4 rounded-xl border border-[#e2d5c3] space-y-2">
-                    <span class="text-xs font-bold text-[#2e4a3f] block uppercase tracking-wider">🥂 LE DIPLOMATE DU PROSECCO</span>
+                    <span class="text-xs font-bold text-[#2e4a3f] block uppercase tracking-wider">🍾 LE PUITS SANS FOND (PROSECCO)</span>
                     <div class="flex gap-2">
                         <input type="text" id="pari-prosecco-voter" placeholder="Ton nom..." class="text-xs px-2.5 py-1.5 rounded-lg border border-[#e2d5c3] bg-white w-1/2 focus:outline-none">
                         <input type="text" id="pari-prosecco-target" placeholder="Ton suspect..." class="text-xs px-2.5 py-1.5 rounded-lg border border-[#e2d5c3] bg-white w-1/2 focus:outline-none">
@@ -148,7 +148,7 @@
                 </div>
 
                 <div class="bg-[#fdfbf7] p-4 rounded-xl border border-[#e2d5c3] space-y-2">
-                    <span class="text-xs font-bold text-[#5c4d43] block uppercase tracking-wider">🛋️ LE RECOUVREUR DE PLAID</span>
+                   <span class="text-xs font-bold text-[#5c4d43] block uppercase tracking-wider">🛋️ LE SQUATTEUR DE PLAID (ALERTE FRILEUX)</span>
                     <div class="flex gap-2">
                         <input type="text" id="pari-plaid-voter" placeholder="Ton nom..." class="text-xs px-2.5 py-1.5 rounded-lg border border-[#e2d5c3] bg-white w-1/2 focus:outline-none">
                         <input type="text" id="pari-plaid-target" placeholder="Ton suspect..." class="text-xs px-2.5 py-1.5 rounded-lg border border-[#e2d5c3] bg-white w-1/2 focus:outline-none">
@@ -327,7 +327,12 @@
         // Lancement de l'analyse automatique dès que la page s'ouvre
         window.onload = loadLiveExcelData;
 
-        const excuses = ["« J'ai dû repasser la nappe. »", "« Mon plaid est allergique à l'herbe. »", "« Je peaufinais mes gestes d'italien avec les mains. »"];
+        const excuses = ["« J'ai dû négocier le protocole avec la douane pour passer la Sangria. »",
+    "« Mon GPS a confondu les pelouses de Breteuil avec les jardins du Vatican. »",
+    "« J'ai essayé de parler espagnol avec mes mains à un pigeon, ça a pris du temps. »",
+    "« J'ai été retenu par mon coiffeur pour peaufiner ma mèche spéciale Aperitivo. »",
+    "« Mon bouchon de Prosecco a sauté au plafond, j'ai dû appeler les pompiers. »",
+    "« Je cherchais des glaçons certifiés d'origine toscane, une galère. »"];
         function generateExcuse() { document.getElementById('excuse-box').innerHTML = excuses[Math.floor(Math.random() * excuses.length)]; }
 
         let isPlaying = false;
