@@ -124,47 +124,51 @@
             </button>
         </section>
 
-        <section id="tab-paris" class="tab-content w-full bg-white text-[#2a2421] rounded-3xl shadow-xl border border-[#e2d5c3] p-6 space-y-6">
-            <div class="text-center space-y-1">
-                <h2 class="serif-title text-2xl font-bold text-[#b85a3a]">I Pronostici della Pelouse</h2>
-                <p class="text-xs text-[#5c4d43] italic">Les paris officiels de la Cour.</p>
+      <section id="tab-paris" class="tab-content w-full bg-white text-[#2a2421] rounded-3xl shadow-xl border border-[#e2d5c3] p-6 space-y-6">
+    <div class="text-center space-y-1">
+        <h2 class="serif-title text-2xl font-bold text-[#b85a3a]">I Pronostici della Pelouse</h2>
+        <p class="text-xs text-[#5c4d43] italic">Les paris officiels de la Cour.</p>
+    </div>
+    
+    <div class="space-y-4">
+        <div class="bg-[#fdfbf7] p-4 rounded-xl border border-[#e2d5c3] space-y-2">
+            <span class="text-xs font-bold text-[#b85a3a] block uppercase tracking-wider">🪵 L’ARNAQUEUR DES QUILLES (MÖLKKY)</span>
+            <p class="text-[10px] text-gray-500 italic mt-[-4px]">Qui va mystérieusement avancer son pied au moment de lancer le bâton ?</p>
+            <div class="flex gap-2">
+                <input type="text" id="pari-molkky-voter" placeholder="Ton nom..." class="text-xs px-2.5 py-1.5 rounded-lg border border-[#e2d5c3] bg-white w-1/2 focus:outline-none">
+                <input type="text" id="pari-molkky-target" placeholder="Ton suspect..." class="text-xs px-2.5 py-1.5 rounded-lg border border-[#e2d5c3] bg-white w-1/2 focus:outline-none">
             </div>
-            
-            <div class="space-y-4">
-                <div class="bg-[#fdfbf7] p-4 rounded-xl border border-[#e2d5c3] space-y-2">
-                    <span class="text-xs font-bold text-[#b85a3a] block uppercase tracking-wider">🪵 LE PIRE JOUEUR DE MÖLKKY</span>
-                    <div class="flex gap-2">
-                        <input type="text" id="pari-molkky-voter" placeholder="Ton nom..." class="text-xs px-2.5 py-1.5 rounded-lg border border-[#e2d5c3] bg-white w-1/2 focus:outline-none">
-                        <input type="text" id="pari-molkky-target" placeholder="Ton suspect..." class="text-xs px-2.5 py-1.5 rounded-lg border border-[#e2d5c3] bg-white w-1/2 focus:outline-none">
-                    </div>
-                </div>
+        </div>
 
-                <div class="bg-[#fdfbf7] p-4 rounded-xl border border-[#e2d5c3] space-y-2">
-                    <span class="text-xs font-bold text-[#2e4a3f] block uppercase tracking-wider">🍾 LE PUITS SANS FOND (PROSECCO)</span>
-                    <div class="flex gap-2">
-                        <input type="text" id="pari-prosecco-voter" placeholder="Ton nom..." class="text-xs px-2.5 py-1.5 rounded-lg border border-[#e2d5c3] bg-white w-1/2 focus:outline-none">
-                        <input type="text" id="pari-prosecco-target" placeholder="Ton suspect..." class="text-xs px-2.5 py-1.5 rounded-lg border border-[#e2d5c3] bg-white w-1/2 focus:outline-none">
-                    </div>
-                </div>
-
-                <div class="bg-[#fdfbf7] p-4 rounded-xl border border-[#e2d5c3] space-y-2">
-                   <span class="text-xs font-bold text-[#5c4d43] block uppercase tracking-wider">🛋️ LE SQUATTEUR DE PLAID (ALERTE FRILEUX)</span>
-                    <div class="flex gap-2">
-                        <input type="text" id="pari-plaid-voter" placeholder="Ton nom..." class="text-xs px-2.5 py-1.5 rounded-lg border border-[#e2d5c3] bg-white w-1/2 focus:outline-none">
-                        <input type="text" id="pari-plaid-target" placeholder="Ton suspect..." class="text-xs px-2.5 py-1.5 rounded-lg border border-[#e2d5c3] bg-white w-1/2 focus:outline-none">
-                    </div>
-                </div>
-
-                <div class="bg-[#fff5f5] p-4 rounded-xl border border-[#feb2b2] space-y-2">
-                    <span class="text-xs font-bold text-[#c53030] block uppercase tracking-wider">🚨 CELLULE ANTI-FRAUDE (MÖLKKY)</span>
-                    <input type="text" id="triche-input" placeholder="Nom du tricheur présumé..." class="w-full text-xs px-2.5 py-1.5 rounded-lg border border-[#feb2b2] bg-white focus:outline-none">
-                </div>
-
-                <button onclick="sendDataToGoogleSheetInvisible(event)" class="w-full py-3 bg-[#b85a3a] text-white font-bold text-xs rounded-xl tracking-wider uppercase transition-colors shadow-sm">
-                    🗳️ ENREGISTRER MES PRONOSTICS REALE
-                </button>
+        <div class="bg-[#fdfbf7] p-4 rounded-xl border border-[#e2d5c3] space-y-2">
+            <span class="text-xs font-bold text-[#2e4a3f] block uppercase tracking-wider">🍾 LE PUITS SANS FOND (PROSECCO)</span>
+            <p class="text-[10px] text-gray-500 italic mt-[-4px]">Qui va descendre les bulles plus vite que son ombre ?</p>
+            <div class="flex gap-2">
+                <input type="text" id="pari-prosecco-voter" placeholder="Ton nom..." class="text-xs px-2.5 py-1.5 rounded-lg border border-[#e2d5c3] bg-white w-1/2 focus:outline-none">
+                <input type="text" id="pari-prosecco-target" placeholder="Ton suspect..." class="text-xs px-2.5 py-1.5 rounded-lg border border-[#e2d5c3] bg-white w-1/2 focus:outline-none">
             </div>
-        </section>
+        </div>
+
+        <div class="bg-[#fdfbf7] p-4 rounded-xl border border-[#e2d5c3] space-y-2">
+            <span class="text-xs font-bold text-[#5c4d43] block uppercase tracking-wider">🎧 LE SQUATTEUR DE BLUETOOTH</span>
+            <p class="text-[10px] text-gray-500 italic mt-[-4px]">Qui va voler l'enceinte pour imposer sa playlist éclatée toute la soirée ?</p>
+            <div class="flex gap-2">
+                <input type="text" id="pari-plaid-voter" placeholder="Ton nom..." class="text-xs px-2.5 py-1.5 rounded-lg border border-[#e2d5c3] bg-white w-1/2 focus:outline-none">
+                <input type="text" id="pari-plaid-target" placeholder="Ton suspect..." class="text-xs px-2.5 py-1.5 rounded-lg border border-[#e2d5c3] bg-white w-1/2 focus:outline-none">
+            </div>
+        </div>
+
+        <div class="bg-[#fff5f5] p-4 rounded-xl border border-[#feb2b2] space-y-2">
+            <span class="text-xs font-bold text-[#c53030] block uppercase tracking-wider">🚨 CELLULE ANTI-FRAUDE (MÖLKKY)</span>
+            <p class="text-[10px] text-gray-500 italic mt-[-4px]">Dénonce ici le joueur de mauvaise foi qui recompte les points à sa sauce.</p>
+            <input type="text" id="triche-input" placeholder="Nom du tricheur présumé..." class="w-full text-xs px-2.5 py-1.5 rounded-lg border border-[#feb2b2] bg-white focus:outline-none">
+        </div>
+
+        <button onclick="sendDataToGoogleSheetInvisible(event)" class="w-full py-3 bg-[#b85a3a] text-white font-bold text-xs rounded-xl tracking-wider uppercase transition-colors shadow-sm">
+            🗳️ ENREGISTRER MES PRONOSTICS REALE
+        </button>
+    </div>
+</section>
 
         <section id="tab-musica" class="tab-content w-full bg-white text-[#2a2421] rounded-3xl shadow-xl border border-[#e2d5c3] p-6 space-y-6">
             <div class="text-center space-y-1">
